@@ -10,8 +10,8 @@ which inherits from Enemy
 
 */
 
-#include <Enemy>
-#include <Puny>
+#include "Enemy"
+#include "Puny"
 
 using namespace std;
 
