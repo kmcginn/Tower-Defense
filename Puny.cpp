@@ -10,8 +10,8 @@ which inherits from Enemy
 
 */
 
-#include "Enemy"
-#include "Puny"
+#include "Enemy.h"
+#include "Puny.h"
 
 using namespace std;
 
@@ -25,5 +25,6 @@ void Puny::display() {
 
 void Puny::takeDamage(int unchangedDamage, char type) {
 
+  loseHealth(unchangedDamage);
 
 }

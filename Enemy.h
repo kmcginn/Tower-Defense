@@ -25,8 +25,11 @@ class Enemy
   int getPosX();
   int getPosY();
   int isDead();
-  
-  
+  int getSpeed();
+  int getHealth();
+  int getMaxHealth();
+  void loseHealth(int);
+
  private:
   int maxHealth;
   int health;

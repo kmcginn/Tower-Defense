@@ -1,6 +1,17 @@
+/*
+Project Group: Chris Groce, Kevin McGinn, Nick Taylor
+CSE 20212
+3/20/2012
+
+Tower.h
+
+This is the interface for the Tower abstract base class
+
+*/
 #ifndef TOWER_H
 #define TOWER_H
 
+using namespace std;
 
 class Tower
 {
@@ -25,7 +36,7 @@ class Tower
 	int xPos;
 	int yPos;
 	
-
+};
 
 
 #endif
