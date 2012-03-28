@@ -15,15 +15,12 @@ which inherits from Enemy
 
 using namespace std;
 
-Puny::Puny(int startX, int startY) : Enemy(startX, startY) {
-  
+Puny::Puny(int startX, int startY) : Enemy(startX, startY) {        // constructor; uses member initialization sytax to create an enemy of
+                                                                    // type "Puny"
 }
 
-void Puny::display() {
 
-}
-
-void Puny::takeDamage(int unchangedDamage, char type) {
+void Puny::takeDamage(int unchangedDamage, char type) {             // causes the ememy to take damage of specified type
 
   loseHealth(unchangedDamage);
 

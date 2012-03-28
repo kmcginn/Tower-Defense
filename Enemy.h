@@ -12,30 +12,35 @@ This is the interface for the Enemy abstract base class
 #ifndef ENEMY_H
 #define ENEMY_H
 
+#include <vector>
+
 using namespace std;
 
 class Enemy
 {
  public:
   
-  Enemy(int startX, int startY);// NOTE!! do be sure to remove all 	
-  virtual void display() = 0;	// names of variable from header file
-  virtual void takeDamage(int unchangeddamage, char type) = 0;
-  void move();
-  int getPosX();
-  int getPosY();
-  int isDead();
-  int getSpeed();
-  int getHealth();
-  int getMaxHealth();
-  void loseHealth(int);
+  Enemy(int, int); //constructor
+  //member functions
+  virtual void takeDamage(int, char) = 0; //take damage of raw value and type (pure virtual)
+  void move(vector<vector<char> >); //moves the enemy to next spot on path
+  int getPosX(); //returns x position of enemy
+  int getPosY(); //returns y position of enemy
+  int isDead(); //returns whether or not enemy is dead
+  int getSpeed(); //returns speed of the enemy
+  int getHealth(); //returns health of the enemy
+  int getMaxHealth(); //returns max health of the enemy
+  void loseHealth(int); //enemy loses inputted amount of health
 
  private:
+  //data
   int maxHealth;
   int health;
   int speed;
-  int xPos;
-  int yPos;
+  int xPos; //current x position
+  int yPos; //current y position
+  int xPrev; //previous x position
+  int yPrev; //previous y position
   
 };
 #endif

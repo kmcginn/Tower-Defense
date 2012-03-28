@@ -21,9 +21,8 @@ using namespace std;
 class Puny : public Enemy {
 
  public:
-  Puny(int startX, int startY);
-  virtual void display();
-  virtual void takeDamage(int unchangedDamage, char type) = 0;
+  Puny(int startX, int startY); //constructor
+  virtual void takeDamage(int unchangedDamage, char type); //have enemy take damage
   
 };
 

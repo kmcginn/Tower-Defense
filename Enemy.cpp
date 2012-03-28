@@ -8,38 +8,61 @@ Enemy.cpp
 This is the implementation for the Enemy abstract base class
 
 */
+#include <iostream>
+#include "Enemy.h"
 
 Enemy::Enemy(int startX, int startY) {
 
-  xPos = startX;
-  yPost = startY;
-
+  xPos = startX;                                // initial positioin of enemy, stored as x and y
+  yPos = startY;
+  xPrev = startX;
+  yPrev = startY;
 }
 
-int Enemy::getPosX() {
+int Enemy::getPosX() {                          // returns x position of enemy
   return xPos;
 }
 
-int Enemy::getPosY() {
+int Enemy::getPosY() {                          // returns y position of enemy
   return yPos;
 }
 
-int Enemy::isDead(){
+int Enemy::isDead(){                            // returns 1 if enemy is dead
   return(health<=0);
 }
 
-int Enemy::getSpeed() {
+int Enemy::getSpeed() {                         // returns speed of enemy
   return speed;
 }
 
-int Enemy::getHealth() {
+int Enemy::getHealth() {                        // returns health of enemy
   return health;
 }
 
-int Enemy::getMaxHealth() {
+int Enemy::getMaxHealth() {                     // returns the maximum health
   return maxHealth;
 }
 
-int Enemy::loseHealth(int damageTaken) {
+void Enemy::loseHealth(int damageTaken) {       // depletes health of enemy
   health -= damageTaken;
+}
+
+void Enemy::move(vector<vector<char> > map) {           // moves enemy one space forward along the path
+  if(map[yPos+1][xPos] == 'P' && yPos+1 != yPrev) {
+      yPrev = yPos++;                                   // next position is down
+      xPrev = xPos;
+  }
+  else if(map[yPos-1][xPos] == 'P' && yPos-1 != yPrev) {
+      yPrev = yPos--;                                   // next position is up
+      xPrev = xPos;
+  }
+  else if(map[yPos][xPos+1] == 'P' && xPos+1 != xPrev) {
+      xPrev = xPos++;                                   // next position is right
+      yPrev = yPos;
+  }
+  else if(map[yPos][xPos-1] == 'P' && xPos-1 != xPrev) {
+      xPrev = xPos--;                                   // next position is left
+      yPrev = yPos;
+  }
+
 }
