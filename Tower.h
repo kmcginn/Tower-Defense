@@ -17,7 +17,7 @@ class Tower
 {
    public:
 	
-	Tower(int x, int y);					// NOTE!! do be sure to remove all 	
+    Tower(int , int );					// NOTE!! do be sure to remove all
 	virtual void display() = 0;				// names of variable from header file
 	int getPosX();
 	int getPosY();
@@ -25,17 +25,21 @@ class Tower
 	int getPower();
 	int sell();				// returns 3/4 of yo money
 	virtual void Fire() = 0;
-	void upgradePower(int upgradeCost);
-	void upgradeFiringRate(int upgradeCost); 		// the image will also be updated by 
+    void upgradePower();
+    void upgradeFiringRate();
+    void upgradeRange();// the image will also be updated by
 								//the display function, based on power and rate
 
    private:
-    	int power;
+    int power;
 	int firingRate;
+    int range;
 	int cost;
 	int xPos;
 	int yPos;
-	
+    int firingRateCost; //upgrade cost for firingRate
+    int powerCost; //upgrade cost for power
+    int rangeCost; // upgrade cost for range
 };
 
 
