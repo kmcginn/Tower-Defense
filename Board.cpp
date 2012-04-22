@@ -24,6 +24,7 @@ Board::Board(const char * filename)    // constructor takes file to be read as a
   //initialize variables
   readError = 0;
   enemiesMoving = 0;
+  basicTowerButton = 0;
 
   //populate list with enemies (for now, just one)
   enemyList.push_back(new Puny(1, 0));
@@ -144,7 +145,7 @@ void Board::basicTowerClick(){ // flips basisTowerButton value
         basicTowerButton=1;
 }
 
-void Board::isBasicTowerClicked(){
+int Board::isBasicTowerClicked(){
     return basicTowerButton;
 }
 
