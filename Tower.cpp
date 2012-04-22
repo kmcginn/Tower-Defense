@@ -39,6 +39,22 @@ int Tower::sell(){				// returns 3/4 of yo money
     return cost*3/4;
 }
 
+void Tower::setFiringRate(int rate){
+    firingRate=rate;
+}
+
+void Tower::setPower(int pow){
+    power=pow;
+}
+
+void Tower::setRange(int dist){
+    range=dist;
+}
+
+int Tower::getRange(){
+    return range;
+}
+
 void Tower::upgradePower(){
     power*=1.2;
     powerCost*=2;
