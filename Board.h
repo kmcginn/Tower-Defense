@@ -38,6 +38,8 @@ class Board
   void stopMoving(); //causes the enemies/towers to stop moving
   Enemy * getEnemy(int); //returns enemy at index in enemy list
   int enemyListSize(); //returns size of enemy list
+  Tower * getTower(int); //returns the tower at index in tower list
+  int towerListSize(); //returns size of tower list
   vector<vector<char> > getGrid(); //returns the grid underlying the board
 
 
@@ -45,7 +47,7 @@ class Board
  private:
   //data
   vector< Enemy* > enemyList; //list of enemies
-  //vector< * Tower> towerList; //list of towers; not used yet
+  vector< Tower*> towerList; //list of towers
   vector<vector<char> > grid;//grid that represents the board
                             // 1 for tower option, -1 for enemy,
                            // 0 for nothing. or something 

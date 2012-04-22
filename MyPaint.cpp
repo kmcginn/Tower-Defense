@@ -93,6 +93,19 @@ void MyPaint::paintEvent(QPaintEvent *) {
                 }
             }
 
+            //display towers
+            int numTowers = myBoard.towerListSize();
+            Tower * tempTower;
+            painter.setBrush(Qt::black);
+            int drawTX = 0;
+            int drawTY = 0;
+            for(int i = 0; i < numTowers; i++){
+                tempTower = myBoard.getTower(i);
+                drawTX = cellDim*tempTower->getPosX() + cellDim/4;
+                drawTY = cellDim*tempTower->getPosY() + cellDim/4;
+                painter.drawRect(drawTX, drawTY, cellDim*3/4, cellDim*3/4);
+            }
+
             //if enemies are moving, draw them
             if(myBoard.isMoving()){
                 int numEnemies = myBoard.enemyListSize();

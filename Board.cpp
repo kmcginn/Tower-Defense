@@ -121,6 +121,14 @@ int Board::enemyListSize(){                    // returns number of enemies
     return(enemyList.size());
 }
 
+Tower * Board::getTower(int index) {
+    return(towerList[index]);
+}
+
+int Board::towerListSize() {
+    return (towerList.size())
+}
+
 vector<vector<char> > Board::getGrid(){        // returns the grid as a vector of vector of char
     return grid;
 }
