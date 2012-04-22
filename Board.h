@@ -33,6 +33,8 @@ class Board
   int getHoriz(); //returns number of cells horizontally
   int getVert(); //returns number of cells vertically
   char getCell(int, int); //returns content of cell in grid
+  void addTower(Tower *); //adds tower pointer to towerlist
+
   int isMoving(); //returns whether or not the enemies/towers are moving
   void startMoving(); //causes the enemies/towers to start moving
   void stopMoving(); //causes the enemies/towers to stop moving
@@ -41,7 +43,8 @@ class Board
   Tower * getTower(int); //returns the tower at index in tower list
   int towerListSize(); //returns size of tower list
   vector<vector<char> > getGrid(); //returns the grid underlying the board
-
+  void basicTowerClick(); // the basic tower button has been clicked
+  int isBasicTowerClicked(); // returns value of basicTowerButton
 
 
  private:
@@ -52,7 +55,9 @@ class Board
                             // 1 for tower option, -1 for enemy,
                            // 0 for nothing. or something 
   int readError; //boolean, whether or not there was an error reading map
-  int enemiesMoving; //boolean, whether or not enemies are moving
+  int enemiesMoving; //boolean, whether or not enemies are movin
+  int basicTowerButton; // boolean, wether or not the basic button is clicked
+
 };
   
 #endif

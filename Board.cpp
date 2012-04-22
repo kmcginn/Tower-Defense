@@ -30,7 +30,7 @@ Board::Board(const char * filename)    // constructor takes file to be read as a
 
   //FOR TESTING ONLY
   //adds towers to the list to make sure they display
-  towerList.push_back(new Quick(3, 1));
+  //towerList.push_back(new Quick(3, 1));
 
   vector<char> tempVec;
   //convert filename to QString
@@ -135,4 +135,19 @@ int Board::towerListSize() {
 
 vector<vector<char> > Board::getGrid(){        // returns the grid as a vector of vector of char
     return grid;
+}
+
+void Board::basicTowerClick(){ // flips basisTowerButton value
+    if (basicTowerButton)
+        basicTowerButton=0;
+    else
+        basicTowerButton=1;
+}
+
+void Board::isBasicTowerClicked(){
+    return basicTowerButton;
+}
+
+void Board::addTower(Tower * newTower) {
+    towerList.push_back(newTower);
 }

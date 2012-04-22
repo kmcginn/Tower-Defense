@@ -128,6 +128,11 @@ void MyPaint::paintEvent(QPaintEvent *) {
             sleep(1); //change duration later
             update();
 
+            //draws button for basic tower
+            painter.setBrush(Qt::black);
+            painter.drawRect(7*cellDim, cellDim(numRows + 2), 2*cellDim, 2*cellDim);
+
+
 	}
 
         //fails to load map
@@ -148,11 +153,17 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
     if(onMoveButton(e->x(), e->y())){           // when move button is clicked, the ememy strts moving
             myBoard.startMoving();
     }
-
+    else if(onBasicTowerButton(e->x(), e->y())){           // when move button is clicked, the ememy strts moving
+        myBoard.basicTowerClick();
+}
     else{
         myBoard.stopMoving();                   // a click anywhere else stops the enemy
     }
 
+    if (myBoard.isBasicTowerClicked()){
+        Quick tower1(e->x()/cellDim, e->y()/cellDim);
+        myBoard.addTower(tower1);
+    }
         //  The update() function belongs to the QWidget parent class, and instructs the window
 	//  that the screen needs to be redrawn.  Leave this at the end of your mousePressEvent function
 	update();
@@ -162,6 +173,19 @@ int MyPaint::onMoveButton(int x, int y) {           // detects if the mouse clic
 
     //checks to see if mouse press is within bounds of the button
     if(x >= cellDim && x <= 6*cellDim && y>= cellDim*(numRows+2) && y <= cellDim*(numRows+5) ) {
+            return 1;
+    }
+
+    else{
+        return 0;
+    }
+
+}
+
+int MyPaint::onBasicTowerButton(int x, int y) {           // detects if the mouse clicks in the movement box
+
+    //checks to see if mouse press is within bounds of the button
+    if(x >= 7*cellDim && x <= 9*cellDim && y>= cellDim*(numRows+2) && y <= cellDim*(numRows+4) ) {
             return 1;
     }
 
