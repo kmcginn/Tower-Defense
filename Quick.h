@@ -8,7 +8,6 @@ class Quick : public Tower {
 
 public:
     Quick(int placeX, int placeY);
-    void display();
     void fire();
 
 };

@@ -12,7 +12,8 @@ HEADERS += MyPaint.h \
     Puny.h \
     Enemy.h \
     Board.h \
-    Tower.h
+    Tower.h \
+    Quick.h
 SOURCES += main.cpp MyPaint.cpp \
     Puny.cpp \
     Enemy.cpp \

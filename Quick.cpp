@@ -11,9 +11,6 @@ Quick::Quick(int posX, int posY) : Tower(posX,posY){
     setPower(2);
 }
 
-void Quick::display() {
-}
-
 void Quick::fire() {
 
 }

@@ -17,9 +17,8 @@ class Tower
 {
    public:
 	
-    Tower(int , int );					// NOTE!! do be sure to remove all
-	virtual void display() = 0;				// names of variable from header file
-	int getPosX();
+    Tower(int , int );
+    int getPosX();
 	int getPosY();
 	int getFiringRate();
 	int getPower();
