@@ -11,11 +11,15 @@ INCLUDEPATH += .
 HEADERS += MyPaint.h \
     Puny.h \
     Enemy.h \
-    Board.h
+    Board.h \
+    Tower.h \
+    Quick.h
 SOURCES += main.cpp MyPaint.cpp \
     Puny.cpp \
     Enemy.cpp \
-    Board.cpp
+    Board.cpp \
+    Tower.cpp \
+    Quick.cpp
 
 OTHER_FILES +=
 
