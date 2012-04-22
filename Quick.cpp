@@ -6,10 +6,9 @@
 using namespace std;
 
 Quick::Quick(int posX, int posY) : Tower(posX,posY){
-    //firingRate=10;
-    //range=5;
-    //power=2;
-    //these need to initialized with set functions
+    setFiringRate(10);
+    setRange(5);
+    setPower(2);
 }
 
 void Quick::display() {
