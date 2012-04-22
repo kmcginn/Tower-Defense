@@ -15,6 +15,7 @@
 #include "Board.h"
 #include "Enemy.h"
 #include "Puny.h"
+#include "Quick.h"
 
 using namespace std;
 
@@ -27,6 +28,9 @@ Board::Board(const char * filename)    // constructor takes file to be read as a
   //populate list with enemies (for now, just one)
   enemyList.push_back(new Puny(1, 0));
 
+  //FOR TESTING ONLY
+  //adds towers to the list to make sure they display
+  towerList.push_back(new Quick(3, 1));
 
   vector<char> tempVec;
   //convert filename to QString
@@ -126,7 +130,7 @@ Tower * Board::getTower(int index) {
 }
 
 int Board::towerListSize() {
-    return (towerList.size())
+    return (towerList.size());
 }
 
 vector<vector<char> > Board::getGrid(){        // returns the grid as a vector of vector of char

@@ -24,7 +24,7 @@ class Tower
 	int getFiringRate();
 	int getPower();
 	int sell();				// returns 3/4 of yo money
-	virtual void Fire() = 0;
+        virtual void fire() = 0;
     void upgradePower();
     void upgradeFiringRate();
     void upgradeRange();// the image will also be updated by
