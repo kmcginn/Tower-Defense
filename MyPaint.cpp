@@ -129,7 +129,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
                         if(tempTower->isInRange(tempEnemy) && !tempEnemy->isDead() && clock%tempTower->getFiringRate()==0) {
                             cerr << "Targeted enemy health: " << tempEnemy->getHealth() << endl;
                             tempTower->fire(tempEnemy);
-                            painter.drawLine(tempTower->getPosX()*cellDim+cellDim/2, tempTower->getPosY()*cellDim+cellDim/2, tempEnemy->getPosX()*cellDim, tempEnemy->getPosY()*cellDim);
+                            painter.drawLine(tempTower->getPosX()*cellDim+cellDim/2, tempTower->getPosY()*cellDim+cellDim/2, tempEnemy->getPosX()*cellDim+cellDim/2, tempEnemy->getPosY()*cellDim+cellDim/2);
                             break;
                         }
                     }
@@ -197,7 +197,12 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
     */
     else if (myBoard.isBasicTowerClicked()){ //need to check if within bounds of board, or on a path, or on a black space
         //cerr << "Clicked on the board after clicking tower button" << endl;
-        myBoard.addTower(new Quick(e->x()/cellDim, e->y()/cellDim));
+        int clickX = e->x()/cellDim;
+        int clickY = e->y()/cellDim;
+        //if valid square is selected (on the board, cell is an X)
+        if(clickX >= 0 && clickX < numCols && clickY >= 0 && clickY < numRows && myBoard.getCell(clickY, clickX) == 'X') {
+            myBoard.addTower(new Quick(clickX, clickY));
+        }
     }
         //  The update() function belongs to the QWidget parent class, and instructs the window
 	//  that the screen needs to be redrawn.  Leave this at the end of your mousePressEvent function
