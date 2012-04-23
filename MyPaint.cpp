@@ -141,10 +141,11 @@ void MyPaint::paintEvent(QPaintEvent *) {
                 //go through all enemies
                 for(int i = 0; i < numEnemies; i++) {
                     temp = myBoard.getEnemy(i);
-                    if(!temp->isDead()&&clock%10==0){
+                    if(!temp->isDead()) {
                         //draw ellipse to represent enemy
                         painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4, cellDim*temp->getPosY() + cellDim/4, cellDim/2, cellDim/2 );
                         //make the enemy move
+                        if(clock%10==0)
                         temp->move(myBoard.getGrid());
                     }
                 }
