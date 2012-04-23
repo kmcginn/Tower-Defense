@@ -17,6 +17,7 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include <unistd.h>
 using namespace std;
 
 
@@ -148,7 +149,8 @@ void MyPaint::paintEvent(QPaintEvent *) {
                     }
                 }
 
-                sleep(.1); //change duration later
+                usleep(100000);
+                //sleep(.1); //change duration later
                 clock+=1;
                 update();
             }
