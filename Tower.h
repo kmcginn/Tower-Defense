@@ -11,6 +11,8 @@ This is the interface for the Tower abstract base class
 #ifndef TOWER_H
 #define TOWER_H
 
+#include "Enemy.h"
+
 using namespace std;
 
 class Tower
@@ -27,7 +29,7 @@ class Tower
     void setFiringRate(int);
     void setPower(int);
     void setRange(int);
-    virtual void fire() = 0;
+    virtual void fire(Enemy *) = 0;
     void upgradePower();
     void upgradeFiringRate();
     void upgradeRange();

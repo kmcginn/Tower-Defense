@@ -112,7 +112,25 @@ void MyPaint::paintEvent(QPaintEvent *) {
 
             //if enemies are moving, draw them
             if(myBoard.isMoving()){
+
+                int numTowers = myBoard.towerListSize();
                 int numEnemies = myBoard.enemyListSize();
+
+                //go through all the towers
+                for(int i = 0; i < numTowers; i++) {
+                    //go through all the enemies
+                    for(int j = 0; j < numEnemies; j++) {
+                        //fire at ONLY the first enemy in range
+                        if(myBoard.getTower(i)->isInRange(myBoard.getEnemy(j)) && !myBoard.getEnemy(j)->isDead()) {
+                            cerr << "Targeted enemy health: " << myBoard.getEnemy(j)->getHealth() << endl;
+                            myBoard.getTower(i)->fire(myBoard.getEnemy(j));
+                            painter.drawLine(myBoard.getTower(i)->getPosX()*cellDim, myBoard.getTower(i)->getPosY()*cellDim, myBoard.getEnemy(j)->getPosX()*cellDim, myBoard.getEnemy(j)->getPosY()*cellDim);
+                            break;
+                        }
+                    }
+                }
+
+
                 Enemy * temp;
                 painter.setBrush(Qt::red); //change for different enemy types in final project
                 //go through all enemies

@@ -30,9 +30,10 @@ class Enemy
   int getSpeed(); //returns speed of the enemy
   int getHealth(); //returns health of the enemy
   int getMaxHealth(); //returns max health of the enemy
-  void loseHealth(int); //enemy loses inputted amount of health
+  void initHealth(int);
 
  private:
+
   //data
   int maxHealth;
   int health;
@@ -41,6 +42,8 @@ class Enemy
   int yPos; //current y position
   int xPrev; //previous x position
   int yPrev; //previous y position
-  
+
+protected:
+  void loseHealth(int); //enemy loses inputted amount of health
 };
 #endif

@@ -16,7 +16,7 @@ which inherits from Enemy
 using namespace std;
 
 Puny::Puny(int startX, int startY) : Enemy(startX, startY) {        // constructor; uses member initialization sytax to create an enemy of
-                                                                    // type "Puny"
+    initHealth(15);                                                 // type "Puny"
 }
 
 

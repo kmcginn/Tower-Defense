@@ -2,6 +2,7 @@
 
 #include"Quick.h"
 #include"Tower.h"
+#include "Enemy.h"
 
 using namespace std;
 
@@ -11,6 +12,6 @@ Quick::Quick(int posX, int posY) : Tower(posX,posY){
     setPower(2);
 }
 
-void Quick::fire() {
-
+void Quick::fire(Enemy * target) {
+    target->takeDamage(this->getPower(), 'n');
 }

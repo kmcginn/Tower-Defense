@@ -72,7 +72,7 @@ void Tower::upgradeRange(){
 }
 
 int Tower::isInRange(Enemy *creeper) {
-    if (sqrt(exp(xPos-creeper->getPosX(),2)+exp(yPos-creeper->getPosY(),2))<=range)
+    if (sqrt(pow(xPos-creeper->getPosX(),2)+pow(yPos-creeper->getPosY(),2))<=range)
         return 1;
     else
         return 0;
