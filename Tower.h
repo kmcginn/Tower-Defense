@@ -39,7 +39,7 @@ class Tower
 
    private:
     int power;
-	int firingRate;
+    int firingRate; // The smaller the faster. Will mod clock by it to determine firing rate
     int range;
 	int cost;
 	int xPos;

@@ -30,6 +30,7 @@ MyPaint::MyPaint(QWidget *parent)
      numRows = myBoard.getVert();
      numCols = myBoard.getHoriz();
      resize(windowHorizontal, windowVertical);
+     clock=0;
 }
 
 // This method is called when the widget needs to be redrawn.
@@ -115,16 +116,19 @@ void MyPaint::paintEvent(QPaintEvent *) {
 
                 int numTowers = myBoard.towerListSize();
                 int numEnemies = myBoard.enemyListSize();
-
+                Tower *tempTower;
+                Enemy *tempEnemy;
                 //go through all the towers
-                for(int i = 0; i < numTowers; i++) {
+                for (int i = 0; i < numTowers; i++) {
                     //go through all the enemies
+                    tempTower=myBoard.getTower(i);
                     for(int j = 0; j < numEnemies; j++) {
                         //fire at ONLY the first enemy in range
-                        if(myBoard.getTower(i)->isInRange(myBoard.getEnemy(j)) && !myBoard.getEnemy(j)->isDead()) {
-                            cerr << "Targeted enemy health: " << myBoard.getEnemy(j)->getHealth() << endl;
-                            myBoard.getTower(i)->fire(myBoard.getEnemy(j));
-                            painter.drawLine(myBoard.getTower(i)->getPosX()*cellDim, myBoard.getTower(i)->getPosY()*cellDim, myBoard.getEnemy(j)->getPosX()*cellDim, myBoard.getEnemy(j)->getPosY()*cellDim);
+                        tempEnemy=myBoard.getEnemy(j);
+                        if(tempTower->isInRange(tempEnemy) && !tempEnemy->isDead() && clock%tempTower->getFiringRate()==0) {
+                            cerr << "Targeted enemy health: " << tempEnemy->getHealth() << endl;
+                            tempTower->fire(tempEnemy);
+                            painter.drawLine(tempTower->getPosX()*cellDim+cellDim/2, tempTower->getPosY()*cellDim+cellDim/2, tempEnemy->getPosX()*cellDim, tempEnemy->getPosY()*cellDim);
                             break;
                         }
                     }
@@ -136,7 +140,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
                 //go through all enemies
                 for(int i = 0; i < numEnemies; i++) {
                     temp = myBoard.getEnemy(i);
-                    if(!temp->isDead()){
+                    if(!temp->isDead()&&clock%10==0){
                         //draw ellipse to represent enemy
                         painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4, cellDim*temp->getPosY() + cellDim/4, cellDim/2, cellDim/2 );
                         //make the enemy move
@@ -144,7 +148,8 @@ void MyPaint::paintEvent(QPaintEvent *) {
                     }
                 }
 
-                sleep(1); //change duration later
+                sleep(.1); //change duration later
+                clock+=1;
                 update();
             }
 

@@ -7,7 +7,7 @@
 using namespace std;
 
 Quick::Quick(int posX, int posY) : Tower(posX,posY){
-    setFiringRate(10);
+    setFiringRate(3);
     setRange(5);
     setPower(2);
 }
