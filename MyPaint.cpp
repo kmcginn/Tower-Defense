@@ -160,11 +160,12 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
     else if(onBasicTowerButton(e->x(), e->y())){           // when move button is clicked, the ememy strts moving
         myBoard.basicTowerClick();
 }
+    /*
     else{
         myBoard.stopMoving();                   // a click anywhere else stops the enemy
     }
-
-    if (myBoard.isBasicTowerClicked()){ //need to check if within bounds of board, or on a path, or on a black space
+    */
+    else if (myBoard.isBasicTowerClicked()){ //need to check if within bounds of board, or on a path, or on a black space
         //cerr << "Clicked on the board after clicking tower button" << endl;
         myBoard.addTower(new Quick(e->x()/cellDim, e->y()/cellDim));
     }
