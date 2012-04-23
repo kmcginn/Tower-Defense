@@ -138,6 +138,10 @@ vector<vector<char> > Board::getGrid(){        // returns the grid as a vector o
     return grid;
 }
 
+void Board::setGrid(char type, int x, int y){
+    grid[x][y]=type;
+}
+
 void Board::basicTowerClick(){ // flips basisTowerButton value
     if (basicTowerButton)
         basicTowerButton=0;
@@ -151,4 +155,6 @@ int Board::isBasicTowerClicked(){
 
 void Board::addTower(Tower * newTower) {
     towerList.push_back(newTower);
+    setgrid('H',newTower->getPosX(),newTower->getPosY())
 }
+

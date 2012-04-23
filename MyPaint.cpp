@@ -76,7 +76,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
                             break;
                         //tile is for nothing (hole)
                         case 'H':
-                            painter.setBrush(Qt::black);
+                            painter.setBrush(Qt::white);
                             break;
                         //tile is base
                         case 'B':

@@ -43,6 +43,7 @@ class Board
   Tower * getTower(int); //returns the tower at index in tower list
   int towerListSize(); //returns size of tower list
   vector<vector<char> > getGrid(); //returns the grid underlying the board
+  void setGrid(char,int,int); // set grid spot to some char
   void basicTowerClick(); // the basic tower button has been clicked
   int isBasicTowerClicked(); // returns value of basicTowerButton
 
