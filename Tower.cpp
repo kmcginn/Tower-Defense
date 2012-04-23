@@ -8,6 +8,7 @@
 #include <fstream>
 #include <string>
 #include <cstdlib>
+#include <cmath>
 #include <QString>
 #include <QtCore/QFile>
 #include <QtCore/QTextStream>
@@ -68,5 +69,12 @@ void Tower::upgradeFiringRate(){
 void Tower::upgradeRange(){
     range*=1.2;
     rangeCost*=2;
+}
+
+int Tower::isInRange(Enemy *creeper) {
+    if (sqrt(exp(xPos-creeper->getPosX(),2)+exp(yPos-creeper->getPosY(),2))<=range)
+        return 1;
+    else
+        return 0;
 }
 

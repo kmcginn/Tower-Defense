@@ -30,7 +30,9 @@ class Tower
     virtual void fire() = 0;
     void upgradePower();
     void upgradeFiringRate();
-    void upgradeRange();// the image will also be updated by
+    void upgradeRange();
+    int isInRange(Enemy *); // returns boolean for whether an enemy is within range
+                                // the image will also be updated by
 								//the display function, based on power and rate
 
    private:
