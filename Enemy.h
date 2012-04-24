@@ -30,14 +30,15 @@ class Enemy
   int getSpeed(); //returns speed of the enemy
   int getHealth(); //returns health of the enemy
   int getMaxHealth(); //returns max health of the enemy
-  void initHealth(int);
+  void initHealth(int); //initializes enemy health
+  void initSpeed(int); //initializes enemy speed
 
  private:
 
   //data
   int maxHealth;
   int health;
-  int speed;
+  int speed; //NOTE: LOWER NUMBER IS FASTER; speed corresponds to how many frames it takes for enemy to move one tile
   int xPos; //current x position
   int yPos; //current y position
   int xPrev; //previous x position
