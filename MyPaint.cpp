@@ -166,6 +166,17 @@ void MyPaint::paintEvent(QPaintEvent *) {
             painter.setBrush(Qt::black);
             painter.drawRect(7*cellDim, cellDim*(numRows + 2), 2*cellDim, 2*cellDim);
 
+            //draws upgrade buttons
+            if (myBoard.isTowerClicked()) {
+                painter.setBrush(Qt::white);
+                painter.drawRect(20*cellDim, cellDim*(numRows+1),5*cellDim,4*cellDim);
+
+                painter.setBrush(Qt::blue);
+                painter.drawRect(21*cellDim, cellDim*(numRows+2),.9*cellDim,1*cellDim);
+                painter.drawRect(22*cellDim, cellDim*(numRows+2),.9*cellDim,1*cellDim);
+                painter.drawRect(23*cellDim, cellDim*(numRows+2),.9*cellDim,1*cellDim);
+
+            }
 
 	}
 
@@ -183,26 +194,45 @@ void MyPaint::paintEvent(QPaintEvent *) {
 void MyPaint::mousePressEvent(QMouseEvent *e) {
 
 
-
+    int clickX = e->x()/cellDim;
+    int clickY = e->y()/cellDim;
     if(onMoveButton(e->x(), e->y())){           // when move button is clicked, the ememy strts moving
             myBoard.startMoving();
+            myBoard.setTowerClicked(-1);
     }
     else if(onBasicTowerButton(e->x(), e->y())){           // when move button is clicked, the ememy strts moving
         myBoard.basicTowerClick();
+        myBoard.setTowerClicked(-1);
+
 }
     /*
     else{
         myBoard.stopMoving();                   // a click anywhere else stops the enemy
     }
     */
-    else if (myBoard.isBasicTowerClicked()){ //need to check if within bounds of board, or on a path, or on a black space
+    else if (myBoard.isBasicTowerButtonClicked()){ //need to check if within bounds of board, or on a path, or on a black space
         //cerr << "Clicked on the board after clicking tower button" << endl;
-        int clickX = e->x()/cellDim;
-        int clickY = e->y()/cellDim;
+
         //if valid square is selected (on the board, cell is an X)
         if(clickX >= 0 && clickX < numCols && clickY >= 0 && clickY < numRows && myBoard.getCell(clickY, clickX) == 'X') {
             myBoard.addTower(new Quick(clickX, clickY));
         }
+        myBoard.setTowerClicked(-1);
+
+    }
+    else if (myBoard.findTower(clickX,clickY)!=-1) { // if a tower is clicked
+        myBoard.setTowerClicked(myBoard.findTower(e->x()/cellDim,e->y()/cellDim));
+
+    }
+    //upgrade range button
+    else if (myBoard.isTowerClicked()&& clickX<cellDim*21.9 && clickX>cellDim*21 && clickY>cellDim*(numRows+2) && clickY<cellDim*(numRows+2)+cellDim) {
+        myBoard.getTowerClicked()->upgradeRange();
+    }
+    else if (myBoard.isTowerClicked()&& clickX<cellDim*22.9 && clickX>cellDim*22 && clickY>cellDim*(numRows+2) && clickY<cellDim*(numRows+2)+cellDim) {
+        myBoard.getTowerClicked()->upgradeFiringRate();
+    }
+    else if (myBoard.isTowerClicked()&& clickX<cellDim*23.9 && clickX>cellDim*23 && clickY>cellDim*(numRows+2) && clickY<cellDim*(numRows+2)+cellDim) {
+        myBoard.getTowerClicked()->upgradePower();
     }
         //  The update() function belongs to the QWidget parent class, and instructs the window
 	//  that the screen needs to be redrawn.  Leave this at the end of your mousePressEvent function

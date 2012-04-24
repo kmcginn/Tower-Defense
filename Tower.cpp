@@ -57,17 +57,19 @@ int Tower::getRange(){
 }
 
 void Tower::upgradePower(){
-    power*=1.2;
+    power+=2;
     powerCost*=2;
 }
 
 void Tower::upgradeFiringRate(){
-    firingRate*=1.2;
-    firingRateCost*=2;
+    if (firingRate>1) {
+        firingRate-=1;
+        firingRateCost*=2;
+    }
 }
 
 void Tower::upgradeRange(){
-    range*=1.2;
+    range+=1;
     rangeCost*=2;
 }
 

@@ -25,6 +25,7 @@ Board::Board(const char * filename)    // constructor takes file to be read as a
   readError = 0;
   enemiesMoving = 0;
   basicTowerButton = 0;
+  towerClicked=-1;
 
   //populate list with enemies (for now, just one)
   enemyList.push_back(new Puny(1, 0));
@@ -149,7 +150,7 @@ void Board::basicTowerClick(){ // flips basisTowerButton value
         basicTowerButton=1;
 }
 
-int Board::isBasicTowerClicked(){
+int Board::isBasicTowerButtonClicked(){
     return basicTowerButton;
 }
 
@@ -158,3 +159,25 @@ void Board::addTower(Tower * newTower) {
     setGrid('H',newTower->getPosX(),newTower->getPosY());
 }
 
+int Board::findTower(int x, int y){
+    for (int i=0; i<towerList.size(); i++) {
+        Tower * temp=towerList[i];
+        if(temp->getPosX()==x && temp->getPosY()==y) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int Board::isTowerClicked(){
+    if (towerClicked==-1) return 0;
+    else return 1;
+}
+
+Tower * Board::getTowerClicked() {
+    return towerList[towerClicked];
+}
+
+void Board::setTowerClicked(int num) {
+    towerClicked=num;
+}
