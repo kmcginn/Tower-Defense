@@ -20,6 +20,7 @@ Enemy::Enemy(int startX, int startY) {
 
   health = 10; //default values, can be changed by child classes
   maxHealth = 10;
+  speed = 10;
 }
 
 int Enemy::getPosX() {                          // returns x position of enemy
@@ -41,6 +42,10 @@ int Enemy::getSpeed() {                         // returns speed of enemy
 void Enemy::initHealth(int startHealth) {
     health = startHealth;
     maxHealth = startHealth;
+}
+
+void Enemy::initSpeed(int startSpeed) {
+    speed = startSpeed;
 }
 
 int Enemy::getHealth() {                        // returns health of enemy

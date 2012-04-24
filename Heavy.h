@@ -1,0 +1,17 @@
+#ifndef HEAVY_H
+#define HEAVY_H
+
+#include "Enemy.h"
+
+using namespace std;
+
+//class definition
+class Heavy : public Enemy {
+
+ public:
+  Heavy(int startX, int startY); //constructor
+  virtual void takeDamage(int unchangedDamage, char type); //have enemy take damage
+
+};
+
+#endif // HEAVY_H
