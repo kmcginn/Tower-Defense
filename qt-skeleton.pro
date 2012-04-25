@@ -13,13 +13,17 @@ HEADERS += MyPaint.h \
     Enemy.h \
     Board.h \
     Tower.h \
-    Quick.h
+    Quick.h \
+    Speedy.h \
+    Heavy.h
 SOURCES += main.cpp MyPaint.cpp \
     Puny.cpp \
     Enemy.cpp \
     Board.cpp \
     Tower.cpp \
-    Quick.cpp
+    Quick.cpp \
+    Speedy.cpp \
+    Heavy.cpp
 
 OTHER_FILES +=
 

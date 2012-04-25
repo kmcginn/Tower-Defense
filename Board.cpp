@@ -15,6 +15,8 @@
 #include "Board.h"
 #include "Enemy.h"
 #include "Puny.h"
+#include "Heavy.h"
+#include "Speedy.h"
 #include "Quick.h"
 
 using namespace std;
@@ -28,7 +30,7 @@ Board::Board(const char * filename)    // constructor takes file to be read as a
   towerClicked=-1;
 
   //populate list with enemies (for now, just one)
-  enemyList.push_back(new Puny(1, 0));
+  //enemyList.push_back(new Puny(1, 0));
 
   //FOR TESTING ONLY
   //adds towers to the list to make sure they display
@@ -180,4 +182,14 @@ Tower * Board::getTowerClicked() {
 
 void Board::setTowerClicked(int num) {
     towerClicked=num;
+}
+
+void Board::addEnemy(char type) {
+    if (type=='p')
+        enemyList.push_back(new Puny(1, 0));
+    else if (type=='h')
+        enemyList.push_back(new Heavy(1, 0));
+    else if (type=='s')
+        enemyList.push_back(new Speedy(1, 0));
+
 }

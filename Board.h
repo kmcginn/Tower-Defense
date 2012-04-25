@@ -41,6 +41,7 @@ class Board
   void stopMoving(); //causes the enemies/towers to stop moving
   Enemy * getEnemy(int); //returns enemy at index in enemy list
   int enemyListSize(); //returns size of enemy list
+  void addEnemy(char); //adds an enemy to the board
   Tower * getTower(int); //returns the tower at index in tower list
   int towerListSize(); //returns size of tower list
   vector<vector<char> > getGrid(); //returns the grid underlying the board
@@ -62,6 +63,7 @@ class Board
   int enemiesMoving; //boolean, whether or not enemies are movin
   int basicTowerButton; // boolean, wether or not the basic button is clicked
   int towerClicked; // what tower is clicked, -1 for none
+  int wave; //wave number
 };
   
 #endif

@@ -203,6 +203,8 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
     if(onMoveButton(e->x(), e->y())){           // when move button is clicked, the ememy strts moving
             myBoard.startMoving();
             myBoard.setTowerClicked(-1);
+            myBoard.addEnemy('p');
+
     }
     else if(onBasicTowerButton(e->x(), e->y())){           // when move button is clicked, the ememy strts moving
         myBoard.basicTowerClick();
