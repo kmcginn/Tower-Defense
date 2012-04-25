@@ -59,6 +59,8 @@ int Tower::getRange(){
 void Tower::upgradePower(){
     power+=2;
     powerCost*=2;
+    cerr << "Power: " << power << endl;
+
 }
 
 void Tower::upgradeFiringRate(){
@@ -66,11 +68,14 @@ void Tower::upgradeFiringRate(){
         firingRate-=1;
         firingRateCost*=2;
     }
+    cerr << "firingRate: " << firingRate << endl;
 }
 
 void Tower::upgradeRange(){
     range+=1;
     rangeCost*=2;
+    cerr << "Range: " << range << endl;
+
 }
 
 int Tower::isInRange(Enemy *creeper) {
