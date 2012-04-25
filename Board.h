@@ -52,6 +52,14 @@ class Board
   Tower * getTowerClicked(); //returns tower that is currently clicked
   void setTowerClicked(int); // sets towerClicked to inputted int
 
+  int getWave(); // returns wave number
+  void nextWave(); //increments wave by one
+  int isWaveDone(int); //checks if wave is done based off of number of enemies already sent
+  void setWaveDone(); //switches waveDone between 0 and 1
+  int getNumSpawned(); //returns number of enemies spawned in current wave
+  void nextSpawned(); //increment number of enemies spawned by one
+  void resetNumSpawned(); //sets numSpawned back to one;
+
  private:
   //data
   vector< Enemy* > enemyList; //list of enemies
@@ -64,6 +72,8 @@ class Board
   int basicTowerButton; // boolean, wether or not the basic button is clicked
   int towerClicked; // what tower is clicked, -1 for none
   int wave; //wave number
+  int waveDone; //whether or not the wave is done
+  int numSpawned; //number of enemies spawned so far, within wave
 };
   
 #endif

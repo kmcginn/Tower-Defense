@@ -39,6 +39,8 @@ MyPaint::MyPaint(QWidget *parent)
 void MyPaint::paintEvent(QPaintEvent *) {
 
 
+
+
 	QPainter painter(this);  //! get a painter object to send drawing commands to
 	 
 	// a QPainter operates (by default) in pixel coordinates, with the origin
@@ -118,7 +120,16 @@ void MyPaint::paintEvent(QPaintEvent *) {
 
             //if enemies are moving, draw them
             if(myBoard.isMoving()){
-
+                 //cerr << myBoard.isWaveDone(myBoard.getNumSpawned()) << endl;
+                if (!myBoard.isWaveDone(myBoard.getNumSpawned())&&clock%10==0) {
+                    myBoard.addEnemy('p');
+                    myBoard.nextSpawned();
+                    cerr << "spawn number: " << myBoard.getNumSpawned() << endl;
+                    if (myBoard.isWaveDone(myBoard.getNumSpawned())) {
+                        myBoard.resetNumSpawned();
+                        myBoard.setWaveDone();
+                    }
+                }
                 int numTowers = myBoard.towerListSize();
                 int numEnemies = myBoard.enemyListSize();
                 Tower *tempTower;
@@ -156,7 +167,12 @@ void MyPaint::paintEvent(QPaintEvent *) {
 
                 usleep(100000);
                 //sleep(.1); //change duration later
-                clock+=1;
+                if (clock>=1000){
+                    clock=1;
+                }
+                else {
+                    clock+=1;
+                }
                 update();
             }
 
@@ -164,11 +180,14 @@ void MyPaint::paintEvent(QPaintEvent *) {
             painter.setBrush(Qt::blue);
             painter.drawRect(cellDim, cellDim*(numRows + 2), 5*cellDim, 3*cellDim);
 
-
-
             //draws button for basic tower
             painter.setBrush(Qt::black);
             painter.drawRect(7*cellDim, cellDim*(numRows + 2), 2*cellDim, 2*cellDim);
+                //button indicator
+            if (myBoard.isBasicTowerButtonClicked()) {
+                painter.setBrush(Qt::green);
+                painter.drawRect(8.5*cellDim,cellDim*(numRows+2),.5*cellDim,.5*cellDim);
+            }
 
             //draws upgrade buttons
             if (myBoard.isTowerClicked()) {
@@ -203,7 +222,11 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
     if(onMoveButton(e->x(), e->y())){           // when move button is clicked, the ememy strts moving
             myBoard.startMoving();
             myBoard.setTowerClicked(-1);
-            myBoard.addEnemy('h');
+            //cerr<<"fun: " << myBoard.isWaveDone(myBoard.getNumSpawned())<<endl;
+            //cerr << myBoard.getNumSpawned() << endl;
+            myBoard.setWaveDone();
+            //cerr<<"fun: " << myBoard.isWaveDone(myBoard.getNumSpawned())<<endl;
+            //myBoard.addEnemy('h');
 
     }
     else if(onBasicTowerButton(e->x(), e->y())){           // when move button is clicked, the ememy strts moving

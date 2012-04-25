@@ -28,6 +28,9 @@ Board::Board(const char * filename)    // constructor takes file to be read as a
   enemiesMoving = 0;
   basicTowerButton = 0;
   towerClicked=-1;
+  numSpawned=0;
+  wave=1;
+  waveDone=1;
 
   //populate list with enemies (for now, just one)
   //enemyList.push_back(new Puny(1, 0));
@@ -192,4 +195,41 @@ void Board::addEnemy(char type) {
     else if (type=='s')
         enemyList.push_back(new Speedy(1, 0));
 
+}
+
+int Board::getWave() {
+    return wave;
+}
+
+void Board::nextWave() {
+    wave+=1;
+}
+
+int Board::isWaveDone(int numEnemy) {
+    if (numEnemy<wave*10&&waveDone==0)
+        return 0;
+    else
+        return 1;
+}
+
+void Board::setWaveDone() {
+    int temp=waveDone;
+    if (temp==1){
+        waveDone=0;
+    }
+    else{
+        waveDone=1;
+    }
+}
+
+int Board::getNumSpawned(){
+    return numSpawned;
+}
+
+void Board::nextSpawned() {
+    numSpawned+=1;
+}
+
+void Board::resetNumSpawned() {
+    numSpawned=0;
 }
