@@ -80,6 +80,10 @@ void MyPaint::paintEvent(QPaintEvent *) {
                         case 'H':
                             painter.setBrush(Qt::white);
                             break;
+                        //tile is for tower
+                        case 'T':
+                            painter.setBrush(Qt::cyan);
+                            break;
                         //tile is base
                         case 'B':
                             painter.setBrush(Qt::green);

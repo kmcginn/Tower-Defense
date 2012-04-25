@@ -156,7 +156,7 @@ int Board::isBasicTowerButtonClicked(){
 
 void Board::addTower(Tower * newTower) {
     towerList.push_back(newTower);
-    setGrid('H',newTower->getPosX(),newTower->getPosY());
+    setGrid('T',newTower->getPosX(),newTower->getPosY());
 }
 
 int Board::findTower(int x, int y){
