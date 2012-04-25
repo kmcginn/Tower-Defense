@@ -44,6 +44,7 @@ class Enemy
   int xPrev; //previous x position
   int yPrev; //previous y position
 
+
 protected:
   void loseHealth(int); //enemy loses inputted amount of health
 };

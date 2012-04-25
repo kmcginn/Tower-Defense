@@ -149,7 +149,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
                         //draw ellipse to represent enemy
                         painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4, cellDim*temp->getPosY() + cellDim/4, cellDim/2, cellDim/2 );
                         //make the enemy move
-                        if(clock%10==0)
+                        if(clock%temp->getSpeed()==0)
                         temp->move(myBoard.getGrid());
                     }
                 }
@@ -203,7 +203,7 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
     if(onMoveButton(e->x(), e->y())){           // when move button is clicked, the ememy strts moving
             myBoard.startMoving();
             myBoard.setTowerClicked(-1);
-            myBoard.addEnemy('p');
+            myBoard.addEnemy('h');
 
     }
     else if(onBasicTowerButton(e->x(), e->y())){           // when move button is clicked, the ememy strts moving
