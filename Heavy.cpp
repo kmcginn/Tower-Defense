@@ -13,11 +13,11 @@
 
 #include "Enemy.h"
 #include "Heavy.h"
-
+#include <cmath>
 using namespace std;
 
-Heavy::Heavy(int startX, int startY) : Enemy(startX, startY) {        // constructor; uses member initialization sytax to create an enemy of
-    initHealth(30); //double health of puny                           // type "Heavy"
+Heavy::Heavy(int startX, int startY, int wave) : Enemy(startX, startY) {        // constructor; uses member initialization sytax to create an enemy of
+    initHealth(30*pow(1.5,wave-1)); //double health of puny                           // type "Heavy"
     initSpeed(20); //half speed of puny
 }
 

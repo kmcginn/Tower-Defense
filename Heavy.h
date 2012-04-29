@@ -9,7 +9,7 @@ using namespace std;
 class Heavy : public Enemy {
 
  public:
-  Heavy(int startX, int startY); //constructor
+  Heavy(int startX, int startY, int wave); //constructor
   virtual void takeDamage(int unchangedDamage, char type); //have enemy take damage
 
 };

@@ -122,12 +122,21 @@ void MyPaint::paintEvent(QPaintEvent *) {
             if(myBoard.isMoving()){
                  //cerr << myBoard.isWaveDone(myBoard.getNumSpawned()) << endl;
                 if (!myBoard.isWaveDone(myBoard.getNumSpawned())&&clock%10==0) {
-                    myBoard.addEnemy('p');
+                    if (myBoard.getWave()%5==0){
+                        myBoard.addEnemy('h');
+                    }
+                    else if ((myBoard.getWave()-3)%5==0) {
+                        myBoard.addEnemy('s');
+                    }
+                    else {
+                        myBoard.addEnemy('p');
+                    }
                     myBoard.nextSpawned();
                     cerr << "spawn number: " << myBoard.getNumSpawned() << endl;
                     if (myBoard.isWaveDone(myBoard.getNumSpawned())) {
                         myBoard.resetNumSpawned();
                         myBoard.setWaveDone();
+                        myBoard.nextWave();
                     }
                 }
                 int numTowers = myBoard.towerListSize();

@@ -189,11 +189,11 @@ void Board::setTowerClicked(int num) {
 
 void Board::addEnemy(char type) {
     if (type=='p')
-        enemyList.push_back(new Puny(1, 0));
+        enemyList.push_back(new Puny(1, 0, wave));
     else if (type=='h')
-        enemyList.push_back(new Heavy(1, 0));
+        enemyList.push_back(new Heavy(1, 0, wave));
     else if (type=='s')
-        enemyList.push_back(new Speedy(1, 0));
+        enemyList.push_back(new Speedy(1, 0, wave));
 
 }
 
@@ -206,7 +206,7 @@ void Board::nextWave() {
 }
 
 int Board::isWaveDone(int numEnemy) {
-    if (numEnemy<wave*10&&waveDone==0)
+    if (numEnemy<10&&waveDone==0)
         return 0;
     else
         return 1;

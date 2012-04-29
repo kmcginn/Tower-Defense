@@ -22,7 +22,7 @@ using namespace std;
 class Speedy : public Enemy {
 
  public:
-  Speedy(int startX, int startY); //constructor
+  Speedy(int startX, int startY, int wave); //constructor
   virtual void takeDamage(int unchangedDamage, char type); //have enemy take damage
 
 };

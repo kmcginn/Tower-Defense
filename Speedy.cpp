@@ -13,11 +13,12 @@ which inherits from Enemy
 
 #include "Enemy.h"
 #include "Speedy.h"
+#include <cmath>
 
 using namespace std;
 
-Speedy::Speedy(int startX, int startY) : Enemy(startX, startY) {        // constructor; uses member initialization sytax to create an enemy of
-    initHealth(7);                                                 // type "Puny"
+Speedy::Speedy(int startX, int startY, int wave) : Enemy(startX, startY) {        // constructor; uses member initialization sytax to create an enemy of
+    initHealth(7*pow(1.5,wave-1));                                                 // type "Puny"
     initSpeed(5);
 }
 
