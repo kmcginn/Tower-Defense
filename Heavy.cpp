@@ -24,6 +24,17 @@ Heavy::Heavy(int startX, int startY, int wave) : Enemy(startX, startY) {        
 
 void Heavy::takeDamage(int unchangedDamage, char type) {             // causes the ememy to take damage of specified type
 
-  loseHealth(unchangedDamage/2); //takes half of raw damage
+    if(type == 'b'){
+        loseHealth(unchangedDamage/2); //takes half of normal damage
+    }
+    else if(type == 'q') {
+        loseHealth(unchangedDamage/4); //takes a quarter of "quick" damage
 
+    }
+    else if(type == 'f') {
+        loseHealth(unchangedDamage*2); //takes DOUBLE fire damage
+    }
+    else {
+        loseHealth(unchangedDamage); //normal damage otherwise
+    }
 }

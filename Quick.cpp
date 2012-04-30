@@ -13,5 +13,5 @@ Quick::Quick(int posX, int posY) : Tower(posX,posY){
 }
 
 void Quick::fire(Enemy * target) {
-    target->takeDamage(this->getPower(), 'n');
+    target->takeDamage(this->getPower(), 'q');
 }

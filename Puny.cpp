@@ -23,6 +23,6 @@ Puny::Puny(int startX, int startY, int wave) : Enemy(startX, startY) {        //
 
 void Puny::takeDamage(int unchangedDamage, char type) {             // causes the ememy to take damage of specified type
 
-  loseHealth(unchangedDamage);
+  loseHealth(unchangedDamage); //takes raw damage, regardless of type
 
 }
