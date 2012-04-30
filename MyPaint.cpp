@@ -162,27 +162,27 @@ void MyPaint::paintEvent(QPaintEvent *) {
                             switch(nxtSpot){
                             case 'd':
                             painter.drawLine(tempTower->getPosX()*cellDim+cellDim/2, tempTower->getPosY()*cellDim+cellDim/2,
-                                             cellDim*tempEnemy->getPosX() + cellDim/4,
-                                             cellDim*tempEnemy->getPosY() + cellDim/4 +
+                                             cellDim*tempEnemy->getPosX() + cellDim/2,
+                                             cellDim*tempEnemy->getPosY() + cellDim/2 +
                                              ((clock-1)%tempEnemy->getSpeed())*cellDim/(double)tempEnemy->getSpeed());
                             break;
                             case 'u':
                             painter.drawLine(tempTower->getPosX()*cellDim+cellDim/2, tempTower->getPosY()*cellDim+cellDim/2,
-                                             cellDim*tempEnemy->getPosX() + cellDim/4,
-                                             cellDim*tempEnemy->getPosY() + cellDim/4 -
+                                             cellDim*tempEnemy->getPosX() + cellDim/2,
+                                             cellDim*tempEnemy->getPosY() + cellDim/2 -
                                              ((clock-1)%tempEnemy->getSpeed())*cellDim/(double)tempEnemy->getSpeed());
                             break;
                             case 'r':
                             painter.drawLine(tempTower->getPosX()*cellDim+cellDim/2, tempTower->getPosY()*cellDim+cellDim/2,
-                                             cellDim*tempEnemy->getPosX() + cellDim/4 +
+                                             cellDim*tempEnemy->getPosX() + cellDim/2 +
                                              ((clock-1)%tempEnemy->getSpeed())*cellDim/(double)tempEnemy->getSpeed(),
-                                             cellDim*tempEnemy->getPosY() + cellDim/4);
+                                             cellDim*tempEnemy->getPosY() + cellDim/2);
                             break;
                             case 'l':
                             painter.drawLine(tempTower->getPosX()*cellDim+cellDim/2, tempTower->getPosY()*cellDim+cellDim/2,
-                                             cellDim*tempEnemy->getPosX() + cellDim/4 -
+                                             cellDim*tempEnemy->getPosX() + cellDim/2 -
                                              ((clock-1)%tempEnemy->getSpeed())*cellDim/(double)tempEnemy->getSpeed(),
-                                             cellDim*tempEnemy->getPosY() + cellDim/4);
+                                             cellDim*tempEnemy->getPosY() + cellDim/2);
                             break;
                             }
                            break;
@@ -248,8 +248,8 @@ void MyPaint::paintEvent(QPaintEvent *) {
             painter.drawRect(7*cellDim, cellDim*(numRows + 2), 2*cellDim, 2*cellDim);
                 //button indicator
             if (myBoard.isBasicTowerButtonClicked()) {
-                painter.setBrush(Qt::green);
-                painter.drawRect(8.5*cellDim,cellDim*(numRows+2),.5*cellDim,.5*cellDim);
+                painter.setPen(Qt::red);
+                painter.drawRect(7*cellDim, cellDim*(numRows + 2), 2*cellDim, 2*cellDim);
             }
 
             //draws upgrade buttons
