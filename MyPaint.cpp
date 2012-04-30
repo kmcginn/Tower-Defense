@@ -165,15 +165,36 @@ void MyPaint::paintEvent(QPaintEvent *) {
 
 
                 Enemy * temp;
+                char nxt;
                 painter.setBrush(Qt::red); //change for different enemy types in final project
                 //go through all enemies
                 for(int i = 0; i < numEnemies; i++) {
                     temp = myBoard.getEnemy(i);
                     if(!temp->isDead()) {
+                        nxt = temp->nextSpace(myBoard.getGrid());
                         //draw ellipse to represent enemy
+                        switch(nxt){
+                        case 'd':
                         painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4,
-                                            cellDim*temp->getPosY() + cellDim/-4 +((clock-1)%temp->getSpeed())*cellDim/(double)temp->getSpeed(),
+                                            cellDim*temp->getPosY() + cellDim/4 +((clock-1)%temp->getSpeed())*cellDim/(double)temp->getSpeed(),
                                             cellDim/2, cellDim/2 );
+                        break;
+                        case 'u':
+                        painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4,
+                                            cellDim*temp->getPosY() + cellDim/4 - ((clock-1)%temp->getSpeed())*cellDim/(double)temp->getSpeed(),
+                                            cellDim/2, cellDim/2 );
+                        break;
+                        case 'r':
+                        painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4 + ((clock-1)%temp->getSpeed())*cellDim/(double)temp->getSpeed(),
+                                            cellDim*temp->getPosY() + cellDim/4,
+                                            cellDim/2, cellDim/2 );
+                        break;
+                        case 'l':
+                        painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4 - ((clock-1)%temp->getSpeed())*cellDim/(double)temp->getSpeed(),
+                                            cellDim*temp->getPosY() + cellDim/4,
+                                            cellDim/2, cellDim/2 );
+                        break;
+                        }
                         //make the enemy move
                         if(clock%temp->getSpeed()==0)
                         temp->move(myBoard.getGrid());

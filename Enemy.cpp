@@ -60,6 +60,24 @@ void Enemy::loseHealth(int damageTaken) {       // depletes health of enemy
   health -= damageTaken;
 }
 
+char Enemy::nextSpace(vector<vector<char> > map) {         // determines the next space for the ememy without moving it
+    if(map[yPos+1][xPos] == 'P' && yPos+1 != yPrev) {
+        return 'd';                                   // next position is down
+    }
+    else if(map[yPos-1][xPos] == 'P' && yPos-1 != yPrev) {
+        return 'u';                                   // next position is up
+    }
+    else if(map[yPos][xPos+1] == 'P' && xPos+1 != xPrev) {
+        return 'r';                                   // next position is right
+    }
+    else if(map[yPos][xPos-1] == 'P' && xPos-1 != xPrev) {
+        return 'l';                                   // next position is left
+    }
+
+}
+
+
+
 void Enemy::move(vector<vector<char> > map) {           // moves enemy one space forward along the path
   if(map[yPos+1][xPos] == 'P' && yPos+1 != yPrev) {
       yPrev = yPos++;                                   // next position is down

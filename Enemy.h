@@ -23,6 +23,7 @@ class Enemy
   Enemy(int, int); //constructor
   //member functions
   virtual void takeDamage(int, char) = 0; //take damage of raw value and type (pure virtual)
+  char nextSpace(vector<vector<char > >); //determines enemy's next space without moving it'
   void move(vector<vector<char> >); //moves the enemy to next spot on path
   int getPosX(); //returns x position of enemy
   int getPosY(); //returns y position of enemy
