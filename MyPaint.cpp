@@ -125,7 +125,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
             //if enemies are moving, draw them
             if(myBoard.isMoving()){
                  //cerr << myBoard.isWaveDone(myBoard.getNumSpawned()) << endl;
-                if (!myBoard.isWaveDone(myBoard.getNumSpawned())&&clock%10==0) {
+                if (!myBoard.isWaveDone(myBoard.getNumSpawned()) && clock%10 == 1) {
                     if (myBoard.getNumSpawned()%5==0){
                         myBoard.addEnemy('h');
                     }
@@ -145,6 +145,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
                 }
                 int numTowers = myBoard.towerListSize();
                 int numEnemies = myBoard.enemyListSize();
+                char nxtSpot;
                 Tower *tempTower;
                 Enemy *tempEnemy;
                 //go through all the towers
@@ -157,8 +158,34 @@ void MyPaint::paintEvent(QPaintEvent *) {
                         if(tempTower->isInRange(tempEnemy) && !tempEnemy->isDead() && clock%tempTower->getFiringRate()==0) {
                             cerr << "Targeted enemy health: " << tempEnemy->getHealth() << endl;
                             tempTower->fire(tempEnemy);
-                            painter.drawLine(tempTower->getPosX()*cellDim+cellDim/2, tempTower->getPosY()*cellDim+cellDim/2, tempEnemy->getPosX()*cellDim+cellDim/2, tempEnemy->getPosY()*cellDim+cellDim/2);
+                            nxtSpot = tempEnemy->nextSpace(myBoard.getGrid());
+                            switch(nxtSpot){
+                            case 'd':
+                            painter.drawLine(tempTower->getPosX()*cellDim+cellDim/2, tempTower->getPosY()*cellDim+cellDim/2,
+                                             cellDim*tempEnemy->getPosX() + cellDim/4,
+                                             cellDim*tempEnemy->getPosY() + cellDim/4 +
+                                             ((clock-1)%tempEnemy->getSpeed())*cellDim/(double)tempEnemy->getSpeed());
                             break;
+                            case 'u':
+                            painter.drawLine(tempTower->getPosX()*cellDim+cellDim/2, tempTower->getPosY()*cellDim+cellDim/2,
+                                             cellDim*tempEnemy->getPosX() + cellDim/4,
+                                             cellDim*tempEnemy->getPosY() + cellDim/4 -
+                                             ((clock-1)%tempEnemy->getSpeed())*cellDim/(double)tempEnemy->getSpeed());
+                            break;
+                            case 'r':
+                            painter.drawLine(tempTower->getPosX()*cellDim+cellDim/2, tempTower->getPosY()*cellDim+cellDim/2,
+                                             cellDim*tempEnemy->getPosX() + cellDim/4 +
+                                             ((clock-1)%tempEnemy->getSpeed())*cellDim/(double)tempEnemy->getSpeed(),
+                                             cellDim*tempEnemy->getPosY() + cellDim/4);
+                            break;
+                            case 'l':
+                            painter.drawLine(tempTower->getPosX()*cellDim+cellDim/2, tempTower->getPosY()*cellDim+cellDim/2,
+                                             cellDim*tempEnemy->getPosX() + cellDim/4 -
+                                             ((clock-1)%tempEnemy->getSpeed())*cellDim/(double)tempEnemy->getSpeed(),
+                                             cellDim*tempEnemy->getPosY() + cellDim/4);
+                            break;
+                            }
+                           break;
                         }
                     }
                 }
@@ -255,7 +282,7 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
 
     int clickX = e->x()/cellDim;
     int clickY = e->y()/cellDim;
-    if(onMoveButton(e->x(), e->y())){           // when move button is clicked, the ememy strts moving
+    if(onMoveButton(e->x(), e->y())){           // when move button is clicked, the enemy starts moving
             myBoard.startMoving();
             myBoard.setTowerClicked(-1);
             //cerr<<"fun: " << myBoard.isWaveDone(myBoard.getNumSpawned())<<endl;
