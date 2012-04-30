@@ -59,6 +59,9 @@ class Board
   int getNumSpawned(); //returns number of enemies spawned in current wave
   void nextSpawned(); //increment number of enemies spawned by one
   void resetNumSpawned(); //sets numSpawned back to one;
+  int getMoney();
+  void addMoney(int);
+  void loseMoney(int);
 
  private:
   //data
@@ -74,6 +77,7 @@ class Board
   int wave; //wave number
   int waveDone; //whether or not the wave is done
   int numSpawned; //number of enemies spawned so far, within wave
+  int money;
 };
   
 #endif

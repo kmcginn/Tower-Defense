@@ -31,6 +31,7 @@ Board::Board(const char * filename)    // constructor takes file to be read as a
   numSpawned=0;
   wave=1;
   waveDone=1;
+  money = 300;
 
   //populate list with enemies (for now, just one)
   //enemyList.push_back(new Puny(1, 0));
@@ -162,6 +163,7 @@ int Board::isBasicTowerButtonClicked(){
 void Board::addTower(Tower * newTower) {
     towerList.push_back(newTower);
     setGrid('T',newTower->getPosX(),newTower->getPosY());
+    loseMoney(newTower->getCost());
 }
 
 int Board::findTower(int x, int y){
@@ -232,4 +234,16 @@ void Board::nextSpawned() {
 
 void Board::resetNumSpawned() {
     numSpawned=0;
+}
+
+int Board::getMoney() {
+    return money;
+}
+
+void Board::addMoney(int amt) {
+    money+=amt;
+}
+
+void Board::loseMoney(int amt) {
+    money-=amt;
 }

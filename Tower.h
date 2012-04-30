@@ -26,6 +26,10 @@ class Tower
 	int getPower();
     int getRange();
     char getType();
+    int getCost();
+    int getFRCost();
+    int getPCost();
+    int getRCost();
 	int sell();				// returns 3/4 of yo money
     void setFiringRate(int);
     void setPower(int);

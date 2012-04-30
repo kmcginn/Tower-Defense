@@ -19,6 +19,10 @@ Tower::Tower(int x, int y) {
     xPos=x;
     yPos=y;
     towerType = 'b';
+    rangeCost=50;
+    powerCost=50;
+    firingRateCost=50;
+    cost=100;
 }
 
 int Tower::getPosX(){
@@ -94,3 +98,18 @@ int Tower::isInRange(Enemy *creeper) {
         return 0;
 }
 
+int Tower::getCost() {
+    return cost;
+}
+
+int Tower::getFRCost() {
+    return firingRateCost;
+}
+
+int Tower::getPCost() {
+    return powerCost;
+}
+
+int Tower::getRCost() {
+    return rangeCost;
+}

@@ -39,6 +39,8 @@ MyPaint::MyPaint(QWidget *parent)
 // This method is called when the widget needs to be redrawn.
 //
 void MyPaint::paintEvent(QPaintEvent *) {
+    cerr << " you got: " << myBoard.getMoney() << endl;
+
 
         QPainter painter(this);  //! get a painter object to send drawing commands to
 	 
@@ -328,16 +330,25 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
     }
     //upgrade range button
     else if (myBoard.isTowerClicked()&& e->x()<=cellDim*21.9 && e->x()>=cellDim*21 && e->y()>=cellDim*(numRows+2) && e->y()<=cellDim*(numRows+3)) {
-        myBoard.getTowerClicked()->upgradeRange();
+        if(myBoard.getMoney() >= myBoard.getTowerClicked()->getRCost()){
+            myBoard.loseMoney(myBoard.getTowerClicked()->getRCost());
+            myBoard.getTowerClicked()->upgradeRange();
+        }
         //cerr << "an upgrade has been clicked" << endl;
     }
     else if (myBoard.isTowerClicked()&& e->x()<=cellDim*22.9 && e->x()>=cellDim*22 && e->y()>=cellDim*(numRows+2) && e->y()<=cellDim*(numRows+3)) {
-        myBoard.getTowerClicked()->upgradeFiringRate();
+        if(myBoard.getMoney() >= myBoard.getTowerClicked()->getFRCost()){
+            myBoard.loseMoney(myBoard.getTowerClicked()->getFRCost());
+            myBoard.getTowerClicked()->upgradeFiringRate();
+        }
         //cerr << "an upgrade has been clicked" << endl;
 
     }
     else if (myBoard.isTowerClicked()&& e->x()<=cellDim*23.9 && e->x()>=cellDim*23 && e->y()>=cellDim*(numRows+2) && e->y()<=cellDim*(numRows+3)) {
-        myBoard.getTowerClicked()->upgradePower();
+        if(myBoard.getMoney() >= myBoard.getTowerClicked()->getPCost()){
+            myBoard.loseMoney(myBoard.getTowerClicked()->getPCost());
+            myBoard.getTowerClicked()->upgradePower();
+        }
         //cerr << "an upgrade has been clicked" << endl;
 
     }
