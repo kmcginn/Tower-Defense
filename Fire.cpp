@@ -8,9 +8,10 @@ Fire::Fire(int posX, int posY) : Tower(posX,posY){
     setFiringRate(3);
     setRange(5);
     setPower(2);
+    setType('f');
 }
 
 void Fire::fire(Enemy * target) {
-    target->takeDamage(this->getPower(), 'f');
+    target->takeDamage(this->getPower(), this->getType());
 }
 

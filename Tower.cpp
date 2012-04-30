@@ -18,6 +18,7 @@
 Tower::Tower(int x, int y) {
     xPos=x;
     yPos=y;
+    towerType = 'b';
 }
 
 int Tower::getPosX(){
@@ -52,8 +53,16 @@ void Tower::setRange(int dist){
     range=dist;
 }
 
+void Tower::setType(char myType) {
+    towerType = myType;
+}
+
 int Tower::getRange(){
     return range;
+}
+
+char Tower::getType() {
+    return towerType;
 }
 
 void Tower::upgradePower(){

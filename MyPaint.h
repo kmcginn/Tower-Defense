@@ -44,6 +44,11 @@ private:
         int onMoveButton(int, int); //returns whether or not mouse click is within the bounds of the movement button
         int onBasicTowerButton(int, int); //returns whether or not mouse click is within the bounds of the basic tower button
         int clock; // background clock for determining timing of attacks and movements
+
+        //pixmaps
+        QPixmap grassMap;
+        //brushes
+        QBrush grassBrush;
 };
 
 #endif

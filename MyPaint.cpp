@@ -12,18 +12,20 @@
 #include "Board.h"
 #include "MyPaint.h"
 #include "Quick.h"
+#include "Basic.h"
 #include "Tower.h"
 #include <QtGui>
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include <typeinfo>
 #include <unistd.h>
 using namespace std;
 
 
 // constructor
 MyPaint::MyPaint(QWidget *parent)
-  : QWidget(parent), myBoard(":/map1.txt") {
+    : QWidget(parent), myBoard(":/map1.txt"), grassMap(":/grass_beta.png"), grassBrush(grassMap) {
      setWindowTitle(tr("Tower Defense"));
      windowHorizontal = 512;
      windowVertical = 512;
@@ -38,13 +40,7 @@ MyPaint::MyPaint(QWidget *parent)
 //
 void MyPaint::paintEvent(QPaintEvent *) {
 
-    //init pixmaps
-    QPixmap grassMap(":/grass_beta.png");
-    //init brushes (from pixmaps)
-    QBrush grassBrush(grassMap);
-
-
-	QPainter painter(this);  //! get a painter object to send drawing commands to
+        QPainter painter(this);  //! get a painter object to send drawing commands to
 	 
 	// a QPainter operates (by default) in pixel coordinates, with the origin
 	// at the upper-left corner
@@ -75,7 +71,6 @@ void MyPaint::paintEvent(QPaintEvent *) {
                     switch(temp){
                         //tile is for towers
                         case 'X':
-                            //painter.setBrush(Qt::blue);
                             painter.setBrush(grassBrush);
                             break;
                         //tile is for enemies
@@ -115,6 +110,21 @@ void MyPaint::paintEvent(QPaintEvent *) {
             int drawTY = 0;
             for(int i = 0; i < numTowers; i++){
                 tempTower = myBoard.getTower(i);
+
+
+                if(tempTower->getType() == 'b') {
+                    painter.setBrush(Qt::white);
+                }
+                else if(tempTower->getType() == 'q') {
+                    painter.setBrush(Qt::blue);
+                }
+                else if(tempTower->getType() == 'f'){
+                    painter.setBrush(Qt::red);
+                }
+                else {
+                    painter.setBrush(Qt::cyan); //unknown type
+                }
+
                 drawTX = cellDim*tempTower->getPosX() + cellDim/4;
                 drawTY = cellDim*tempTower->getPosY() + cellDim/4;
                 painter.drawRect(drawTX, drawTY, cellDim/2, cellDim/2);
@@ -307,7 +317,7 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
 
         //if valid square is selected (on the board, cell is an X)
         if(clickX >= 0 && clickX < numCols && clickY >= 0 && clickY < numRows && myBoard.getCell(clickY, clickX) == 'X') {
-            myBoard.addTower(new Quick(clickX, clickY));
+            myBoard.addTower(new Basic(clickX, clickY));
         }
         myBoard.setTowerClicked(-1);
 

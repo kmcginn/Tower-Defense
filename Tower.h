@@ -25,17 +25,19 @@ class Tower
 	int getFiringRate();
 	int getPower();
     int getRange();
+    char getType();
 	int sell();				// returns 3/4 of yo money
     void setFiringRate(int);
     void setPower(int);
     void setRange(int);
+    void setType(char);
     virtual void fire(Enemy *) = 0;
     void upgradePower();
     void upgradeFiringRate();
     void upgradeRange();
     int isInRange(Enemy *); // returns boolean for whether an enemy is within range
                                 // the image will also be updated by
-								//the display function, based on power and rate
+                            //the display function, based on power and rate
 
    private:
     int power;
@@ -47,6 +49,7 @@ class Tower
     int firingRateCost; //upgrade cost for firingRate
     int powerCost; //upgrade cost for power
     int rangeCost; // upgrade cost for range
+    char towerType;
 };
 
 

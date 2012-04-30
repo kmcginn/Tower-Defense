@@ -10,8 +10,9 @@ Quick::Quick(int posX, int posY) : Tower(posX,posY){
     setFiringRate(3);
     setRange(5);
     setPower(2);
+    setType('q');
 }
 
 void Quick::fire(Enemy * target) {
-    target->takeDamage(this->getPower(), 'q');
+    target->takeDamage(this->getPower(), this->getType());
 }

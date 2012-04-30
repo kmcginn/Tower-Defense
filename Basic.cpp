@@ -9,8 +9,9 @@ Basic::Basic(int posX, int posY) : Tower(posX,posY){
     setFiringRate(3);
     setRange(5);
     setPower(2);
+    setType('b');
 }
 
 void Basic::fire(Enemy * target) {
-    target->takeDamage(this->getPower(), 'b');
+    target->takeDamage(this->getPower(), this->getType());
 }
