@@ -126,10 +126,10 @@ void MyPaint::paintEvent(QPaintEvent *) {
             if(myBoard.isMoving()){
                  //cerr << myBoard.isWaveDone(myBoard.getNumSpawned()) << endl;
                 if (!myBoard.isWaveDone(myBoard.getNumSpawned())&&clock%10==0) {
-                    if (myBoard.getWave()%5==0){
+                    if (myBoard.getNumSpawned()%5==0){
                         myBoard.addEnemy('h');
                     }
-                    else if ((myBoard.getWave()-3)%5==0) {
+                    else if ((myBoard.getNumSpawned())%3==0) {
                         myBoard.addEnemy('s');
                     }
                     else {
