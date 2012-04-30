@@ -25,6 +25,16 @@ Speedy::Speedy(int startX, int startY, int wave) : Enemy(startX, startY) {      
 
 void Speedy::takeDamage(int unchangedDamage, char type) {             // causes the ememy to take damage of specified type
 
-  loseHealth(unchangedDamage);
-
+    if(type == 'b'){
+        loseHealth(unchangedDamage); //regular damage from basic towers
+    }
+    else if (type == 'q') {
+        loseHealth(unchangedDamage*2); //double damage from quick towers
+    }
+    else if(type == 'f') {
+        loseHealth(unchangedDamage/2); //half damage from fire towers
+    }
+    else {
+        loseHealth(unchangedDamage); //regular damage otherwise
+    }
 }
