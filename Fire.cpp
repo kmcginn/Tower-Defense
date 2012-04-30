@@ -5,7 +5,7 @@
 using namespace std;
 
 Fire::Fire(int posX, int posY) : Tower(posX,posY){
-    setFiringRate(3);
+    setFiringRate(6);
     setRange(5);
     setPower(2);
     setType('f');

@@ -6,7 +6,7 @@
 using namespace std;
 
 Basic::Basic(int posX, int posY) : Tower(posX,posY){
-    setFiringRate(3);
+    setFiringRate(6);
     setRange(5);
     setPower(2);
     setType('b');

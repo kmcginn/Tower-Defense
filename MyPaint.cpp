@@ -135,7 +135,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
             //if enemies are moving, draw them
             if(myBoard.isMoving()){
                  //cerr << myBoard.isWaveDone(myBoard.getNumSpawned()) << endl;
-                if (!myBoard.isWaveDone(myBoard.getNumSpawned()) && clock%10 == 1) {
+                if (!myBoard.isWaveDone(myBoard.getNumSpawned()) && clock%20 == 1) {
                     if (myBoard.getNumSpawned()%5==0){
                         myBoard.addEnemy('h');
                     }
@@ -238,7 +238,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
                     }
                 }
 
-                usleep(100000);
+                usleep(50000);
                 //sleep(.1); //change duration later
                 if (clock>=1000){
                     clock=1;
