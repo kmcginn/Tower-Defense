@@ -38,7 +38,10 @@ MyPaint::MyPaint(QWidget *parent)
 //
 void MyPaint::paintEvent(QPaintEvent *) {
 
-
+    //init pixmaps
+    QPixmap grassMap(":/grass_beta.png");
+    //init brushes (from pixmaps)
+    QBrush grassBrush(grassMap);
 
 
 	QPainter painter(this);  //! get a painter object to send drawing commands to
@@ -72,7 +75,8 @@ void MyPaint::paintEvent(QPaintEvent *) {
                     switch(temp){
                         //tile is for towers
                         case 'X':
-                            painter.setBrush(Qt::blue);
+                            //painter.setBrush(Qt::blue);
+                            painter.setBrush(grassBrush);
                             break;
                         //tile is for enemies
                         case 'P':

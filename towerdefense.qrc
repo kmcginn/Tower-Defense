@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>map1.txt</file>
         <file>map2.txt</file>
+        <file>grass_beta.png</file>
     </qresource>
 </RCC>
