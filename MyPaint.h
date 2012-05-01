@@ -48,6 +48,9 @@ private:
         int onQuickTowerButton(int, int); //returns whether or not mouse click is within the bounds of the quick tower button
         int onFireTowerButton(int, int); //returns whether or not mouse click is within the bounds of the fire tower button
         int onSellButton(int, int); //returns whether or not mouse click is within the bounds of the sell button
+        int onUpgradePButton(int, int); //returns whether or not mouse click is within the bounds of the upgrade power button
+        int onUpgradeFRButton(int, int); //returns whether or not mouse click is within the bounds of the upgrade firing rate button
+        int onUpgradeRButton(int, int); //returns whether or not mouse click is within the bounds of the upgrade range button
 
         //pixmaps
         QPixmap grassMap;

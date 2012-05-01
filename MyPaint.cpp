@@ -21,7 +21,7 @@
 #include <cmath>
 #include <unistd.h>
 
-//#define DEBUG
+#define DEBUG
 using namespace std;
 
 
@@ -126,7 +126,15 @@ void MyPaint::paintEvent(QPaintEvent *) {
             for(int i = 0; i < numTowers; i++){
                 tempTower = myBoard.getTower(i);
 
+                //highlight border of tower if it is selected
+                if(myBoard.getTowerClickedIndex() == i) {
+                    painter.setPen(Qt::red);
+                }
+                else {
+                    painter.setPen(Qt::black);
+                }
 
+                //set color based on tower type
                 if(tempTower->getType() == 'b') {
                     painter.setBrush(Qt::white);
                 }
@@ -142,7 +150,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
 
                 drawTX = cellDim*tempTower->getPosX() + cellDim/4;
                 drawTY = cellDim*tempTower->getPosY() + cellDim/4;
-                painter.drawRect(drawTX, drawTY, cellDim/2, cellDim/2);
+                painter.drawRect(drawTX, drawTY, cellDim/2, cellDim/2); //draw tower
             }
 
 
@@ -173,6 +181,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
                 int numTowers = myBoard.towerListSize();
                 int numEnemies = myBoard.enemyListSize();
                 char nxtSpot;
+                double contShootFactor;
                 Tower *tempTower;
                 Enemy *tempEnemy;
 
@@ -191,29 +200,30 @@ void MyPaint::paintEvent(QPaintEvent *) {
 #endif
                             tempTower->fire(tempEnemy);
                             nxtSpot = tempEnemy->nextSpace(myBoard.getGrid());
+
+                            //this variable helps the tower's shot track the enemy as it move continously
+                            contShootFactor = ((clock-1)%tempEnemy->getSpeed())*cellDim/(double)tempEnemy->getSpeed();
+
+                            //draw line to show tower shooting at enemy
                             switch(nxtSpot){
                             case 'd':
                             painter.drawLine(tempTower->getPosX()*cellDim+cellDim/2, tempTower->getPosY()*cellDim+cellDim/2,
                                              cellDim*tempEnemy->getPosX() + cellDim/2,
-                                             cellDim*tempEnemy->getPosY() + cellDim/2 +
-                                             ((clock-1)%tempEnemy->getSpeed())*cellDim/(double)tempEnemy->getSpeed());
+                                             cellDim*tempEnemy->getPosY() + cellDim/2 + contShootFactor);
                             break;
                             case 'u':
                             painter.drawLine(tempTower->getPosX()*cellDim+cellDim/2, tempTower->getPosY()*cellDim+cellDim/2,
                                              cellDim*tempEnemy->getPosX() + cellDim/2,
-                                             cellDim*tempEnemy->getPosY() + cellDim/2 -
-                                             ((clock-1)%tempEnemy->getSpeed())*cellDim/(double)tempEnemy->getSpeed());
+                                             cellDim*tempEnemy->getPosY() + cellDim/2 - contShootFactor);
                             break;
                             case 'r':
                             painter.drawLine(tempTower->getPosX()*cellDim+cellDim/2, tempTower->getPosY()*cellDim+cellDim/2,
-                                             cellDim*tempEnemy->getPosX() + cellDim/2 +
-                                             ((clock-1)%tempEnemy->getSpeed())*cellDim/(double)tempEnemy->getSpeed(),
+                                             cellDim*tempEnemy->getPosX() + cellDim/2 + contShootFactor,
                                              cellDim*tempEnemy->getPosY() + cellDim/2);
                             break;
                             case 'l':
                             painter.drawLine(tempTower->getPosX()*cellDim+cellDim/2, tempTower->getPosY()*cellDim+cellDim/2,
-                                             cellDim*tempEnemy->getPosX() + cellDim/2 -
-                                             ((clock-1)%tempEnemy->getSpeed())*cellDim/(double)tempEnemy->getSpeed(),
+                                             cellDim*tempEnemy->getPosX() + cellDim/2 - contShootFactor,
                                              cellDim*tempEnemy->getPosY() + cellDim/2);
                             break;
                             }
@@ -223,11 +233,13 @@ void MyPaint::paintEvent(QPaintEvent *) {
                 }
 
                 //drawing enemies
+
+                //variables
                 Enemy * temp;
                 char nxt;
                 double fadingFactor;
                 double contMoveFactor;
-                //painter.setBrush(Qt::red); //change for different enemy types in final project
+
                 //go through all enemies
 
                 for(int i = 0; i < myBoard.enemyListSize(); i++) {
@@ -235,8 +247,8 @@ void MyPaint::paintEvent(QPaintEvent *) {
                     if(!temp->isDead()) {
 
                         //this variable determines how dark an enemy should be, based on the proportion of max health/current health
-                        //full health = normal color
-                        //little health = almost black
+                        //full health (fadingFactor = 100) = normal color
+                        //little health (fadingFactor >> 100) = almost black
                         fadingFactor = ( (double)temp->getMaxHealth()/temp->getHealth() ) * 100;
 
                         //set enemy color
@@ -285,12 +297,12 @@ void MyPaint::paintEvent(QPaintEvent *) {
                         if(clock%temp->getSpeed()==0)
                         temp->move(myBoard.getGrid());
                     }
-                    else {
-                        myBoard.removeEnemy(i);
+                    else { //current enemy is dead
+                        myBoard.removeEnemy(i); //remove enemy from the board
 #ifdef DEBUG
                         cerr << "Removed enemy at index " << i << endl;
 #endif
-                        i--; //to account for removing enemy
+                        i--; //shift index to account for removing enemy
 #ifdef DEBUG
                         cerr << "Number of enemies left: " << myBoard.enemyListSize() << endl;
 #endif
@@ -315,7 +327,6 @@ void MyPaint::paintEvent(QPaintEvent *) {
             painter.setBrush(basicButtonBrush);
             if (myBoard.isBasicTowerButtonClicked()) {
                 painter.setPen(Qt::red);
-                //painter.drawRect(7*cellDim, cellDim*(numRows + 2), 2*cellDim, 2*cellDim);
             }
             else {
                 painter.setPen(Qt::black);
@@ -378,6 +389,7 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
 
     int clickX = e->x()/cellDim;
     int clickY = e->y()/cellDim;
+
     if(onMoveButton(e->x(), e->y())){           // when move button is clicked, the enemy starts moving
             myBoard.startMoving();
             myBoard.setTowerClicked(-1);
@@ -388,28 +400,29 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
             //myBoard.addEnemy('h');
 
     }
-    else if(onBasicTowerButton(e->x(), e->y())){           // when move button is clicked, the ememy strts moving
+    else if(onBasicTowerButton(e->x(), e->y())){ //Basic Tower construction button is clicked
         myBoard.basicTowerClick();
         myBoard.setTowerClicked(-1);
     }
-    else if(onQuickTowerButton(e->x(), e->y())) {
+    else if(onQuickTowerButton(e->x(), e->y())) { //Quick Tower construction button is clicked
         myBoard.quickTowerClick();
         myBoard.setTowerClicked(-1);
     }
 
-    else if(onFireTowerButton(e->x(), e->y())){
+    else if(onFireTowerButton(e->x(), e->y())){ //Fire Tower construction button is clicked
         myBoard.fireTowerClick();
         myBoard.setTowerClicked(-1);
     }
 
-    else if(onSellButton(e->x(), e->y()) && myBoard.isTowerClicked()) {
+    else if(onSellButton(e->x(), e->y()) && myBoard.isTowerClicked()) { //sell button is clicked after a tower has been selected
         //cerr << "Successful sell click!" << endl;
-        myBoard.setGrid('H', myBoard.getTowerClicked()->getPosX(), myBoard.getTowerClicked()->getPosY());
-        myBoard.sellTower(myBoard.getTowerClickedIndex());
-        myBoard.setTowerClicked(-1);
+        myBoard.setGrid('H', myBoard.getTowerClicked()->getPosX(), myBoard.getTowerClicked()->getPosY()); //set tower's grid space to hole
+        myBoard.sellTower(myBoard.getTowerClickedIndex()); //sell the tower
+        myBoard.setTowerClicked(-1); //deselect tower
     }
 
-    else if (myBoard.isBasicTowerButtonClicked()){ //need to check if within bounds of board, or on a path, or on a black space
+    else if (myBoard.isBasicTowerButtonClicked()){ //Basic Tower construction button is active (placing a Basic Tower)
+
         //cerr << "Clicked on the board after clicking tower button" << endl;
 
         //if valid square is selected (on the board, cell is an X)
@@ -419,7 +432,7 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
         myBoard.setTowerClicked(-1);
 
     }
-    else if(myBoard.isQuickTowerButtonClicked()) { //quick tower button is active (placing a quick tower)
+    else if(myBoard.isQuickTowerButtonClicked()) { //Quick Tower construction button is active (placing a quick tower)
 
          //check that click is a valid space for a tower located within the grid
         if(clickX >= 0 && clickX < numCols && clickY >= 0 && clickY < numRows && myBoard.getCell(clickY, clickX) == 'X'){
@@ -428,7 +441,7 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
         myBoard.setTowerClicked(-1); //deselect current tower, if any
     }
 
-    else if(myBoard.isFireTowerButtonClicked()) {
+    else if(myBoard.isFireTowerButtonClicked()) { //Fire Tower construction button is active (placing a Fire Tower)
 
         if(clickX >= 0 && clickX < numCols && clickY >= 0 && clickY < numRows && myBoard.getCell(clickY, clickX) == 'X'){
             myBoard.addTower(new Fire(clickX, clickY)); //add fire tower to board
@@ -437,29 +450,46 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
     }
 
     else if (myBoard.findTower(clickX,clickY)!=-1) { // if a tower is clicked
-        myBoard.setTowerClicked(myBoard.findTower(e->x()/cellDim,e->y()/cellDim));
+        myBoard.setTowerClicked(myBoard.findTower(e->x()/cellDim,e->y()/cellDim)); //have board find and store selected tower
 
     }
-    //upgrade range button
-    else if (myBoard.isTowerClicked()&& e->x()<=cellDim*21.9 && e->x()>=cellDim*21 && e->y()>=cellDim*(numRows+2) && e->y()<=cellDim*(numRows+3)) {
+    //click upgrade range button after selecting tower
+    else if (myBoard.isTowerClicked()&& onUpgradeRButton(e->x(),e->y())){ //e->x()<=cellDim*21.9 && e->x()>=cellDim*21 && e->y()>=cellDim*(numRows+2) && e->y()<=cellDim*(numRows+3)) {
         if(myBoard.getMoney() >= myBoard.getTowerClicked()->getRCost()){
             myBoard.loseMoney(myBoard.getTowerClicked()->getRCost());
             myBoard.getTowerClicked()->upgradeRange();
         }
+        else {
+#ifdef DEBUG
+            cerr<< "You don't have enough money!" << endl;
+#endif
+        }
         //cerr << "an upgrade has been clicked" << endl;
     }
-    else if (myBoard.isTowerClicked()&& e->x()<=cellDim*22.9 && e->x()>=cellDim*22 && e->y()>=cellDim*(numRows+2) && e->y()<=cellDim*(numRows+3)) {
+    //click upgrade firing rate button after selecting tower
+    else if (myBoard.isTowerClicked()&& onUpgradeFRButton(e->x(),e->y())) { //e->x()<=cellDim*22.9 && e->x()>=cellDim*22 && e->y()>=cellDim*(numRows+2) && e->y()<=cellDim*(numRows+3)) {
         if(myBoard.getMoney() >= myBoard.getTowerClicked()->getFRCost()){
             myBoard.loseMoney(myBoard.getTowerClicked()->getFRCost());
             myBoard.getTowerClicked()->upgradeFiringRate();
         }
+        else {
+#ifdef DEBUG
+            cerr << "You don't have enough money!" << endl;
+#endif
+        }
         //cerr << "an upgrade has been clicked" << endl;
 
     }
-    else if (myBoard.isTowerClicked()&& e->x()<=cellDim*23.9 && e->x()>=cellDim*23 && e->y()>=cellDim*(numRows+2) && e->y()<=cellDim*(numRows+3)) {
+    //click upgrade power button after selecting tower
+    else if (myBoard.isTowerClicked()&& onUpgradePButton(e->x(),e->y())) { //e->x()<=cellDim*23.9 && e->x()>=cellDim*23 && e->y()>=cellDim*(numRows+2) && e->y()<=cellDim*(numRows+3)) {
         if(myBoard.getMoney() >= myBoard.getTowerClicked()->getPCost()){
             myBoard.loseMoney(myBoard.getTowerClicked()->getPCost());
             myBoard.getTowerClicked()->upgradePower();
+        }
+        else {
+#ifdef DEBUG
+            cerr << "You don't have enough money!" << endl;
+#endif
         }
         //cerr << "an upgrade has been clicked" << endl;
 
@@ -469,12 +499,14 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
     }
     //cerr << clickX << " " << clickY << endl;
     //cerr << cellDim*21 << " " << cellDim*(numRows+2) << endl;
+
+
         //  The update() function belongs to the QWidget parent class, and instructs the window
 	//  that the screen needs to be redrawn.  Leave this at the end of your mousePressEvent function
 	update();
 }
 
-int MyPaint::onMoveButton(int x, int y) {           // detects if the mouse clicks in the movement box
+int MyPaint::onMoveButton(int x, int y) {           // returns whether inputted x and y grid coordinates are in the movement box
 
     //checks to see if mouse press is within bounds of the button
     if(x >= cellDim && x <= 6*cellDim && y>= cellDim*(numRows+2) && y <= cellDim*(numRows+5) ) {
@@ -487,7 +519,7 @@ int MyPaint::onMoveButton(int x, int y) {           // detects if the mouse clic
 
 }
 
-int MyPaint::onBasicTowerButton(int x, int y) {           // detects if the mouse clicks in the movement box
+int MyPaint::onBasicTowerButton(int x, int y) {  // returns whether inputted x and y grid coordinates are in the Basic Tower button
 
     //checks to see if mouse press is within bounds of the button
     if(x >= 7*cellDim && x <= 9*cellDim && y>= cellDim*(numRows+2) && y <= cellDim*(numRows+4) ) {
@@ -501,7 +533,7 @@ int MyPaint::onBasicTowerButton(int x, int y) {           // detects if the mous
 
 }
 
-int MyPaint::onQuickTowerButton(int x, int y) {
+int MyPaint::onQuickTowerButton(int x, int y) { //returns whether inputted x and y grid coordinates are in the Quick Tower button
 
     if( x >= 10*cellDim && x<=12*cellDim && y >= cellDim*(numRows+2) && y <= cellDim*(numRows+4) ) {
         return 1;
@@ -511,7 +543,7 @@ int MyPaint::onQuickTowerButton(int x, int y) {
     }
 }
 
-int MyPaint::onFireTowerButton(int x, int y) {
+int MyPaint::onFireTowerButton(int x, int y) { //returns whether inputted x and y grid coordinates are in Fire Tower button
     if( x >= 13*cellDim && x<=15*cellDim && y >= cellDim*(numRows+2) && y <= cellDim*(numRows+4)) {
         return 1;
     }
@@ -520,11 +552,39 @@ int MyPaint::onFireTowerButton(int x, int y) {
     }
 }
 
-int MyPaint::onSellButton(int x, int y) {
+int MyPaint::onSellButton(int x, int y) { //returns whether inputted x and y grid coordinates are in the Sell Tower button
     if( x >= 21*cellDim && x <= 24*cellDim && y >= cellDim*(numRows+3.5) && y <= cellDim*(numRows+4.5)) {
         return 1;
     }
     else {
+        return 0;
+    }
+}
+
+int MyPaint::onUpgradeFRButton(int x, int y) {//returns whether inputted x and y grid coordinates are in the upgrade firing rate button
+    if(x<=cellDim*22.9 && x >=cellDim*22 && y >=cellDim*(numRows+2) && y <=cellDim*(numRows+3)) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+
+}
+
+int MyPaint::onUpgradePButton(int x, int y) {//returns whether inputted x and y grid coordinates are in the upgrade power button
+    if(x<=cellDim*23.9 && x>=cellDim*23 && y>=cellDim*(numRows+2) && y <=cellDim*(numRows+3)) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+int MyPaint::onUpgradeRButton(int x, int y) {//returns whether inputted x and y grid coordinates are in the upgrade range button
+    if(x<=cellDim*21.9 && x>=cellDim*21 && y>=cellDim*(numRows+2) && y<=cellDim*(numRows+3)) {
+        return 1;
+    }
+    else{
         return 0;
     }
 }
