@@ -32,9 +32,11 @@ class Enemy
   int getHealth(); //returns health of the enemy
   int getMaxHealth(); //returns max health of the enemy
   char getEnemyType(); //returns type of the enemy
+  int getEnemyValue(); //returns value of enemy
   void initHealth(int); //initializes enemy health
   void initSpeed(int); //initializes enemy speed
   void initType(char); //initializes enemy type
+  void initValue(int); //intializes enemy value
 
  private:
 
@@ -47,6 +49,7 @@ class Enemy
   int xPrev; //previous x position
   int yPrev; //previous y position
   char enemyType; //type of enemy (p for Puny, s for Speedy, h for Heavy)
+  int enemyValue; //amount of money player gets for killing enemy
 
 protected:
   void loseHealth(int); //enemy loses inputted amount of health

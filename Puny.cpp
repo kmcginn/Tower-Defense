@@ -19,6 +19,7 @@ using namespace std;
 Puny::Puny(int startX, int startY, int wave) : Enemy(startX, startY) {        // constructor; uses member initialization sytax to create an enemy of
     initHealth(15*pow(1.5,wave-1));                                                 // type "Puny"
     initType('p');
+    initValue(50);
 }
 
 

@@ -20,6 +20,8 @@
 #include <fstream>
 #include <cmath>
 #include <unistd.h>
+
+//#define DEBUG
 using namespace std;
 
 
@@ -42,7 +44,10 @@ MyPaint::MyPaint(QWidget *parent)
 // This method is called when the widget needs to be redrawn.
 //
 void MyPaint::paintEvent(QPaintEvent *) {
+ #ifdef DEBUG
         cerr << " you got: " << myBoard.getMoney() << endl;
+ #endif
+
 
         QPainter painter(this);  //! get a painter object to send drawing commands to
 	 
@@ -150,7 +155,9 @@ void MyPaint::paintEvent(QPaintEvent *) {
                         myBoard.addEnemy('p');
                     }
                     myBoard.nextSpawned();
+#ifdef DEBUG
                     cerr << "spawn number: " << myBoard.getNumSpawned() << endl;
+#endif
                     if (myBoard.isWaveDone(myBoard.getNumSpawned())) {
                         myBoard.resetNumSpawned();
                         myBoard.setWaveDone();
@@ -173,7 +180,9 @@ void MyPaint::paintEvent(QPaintEvent *) {
                         //fire at ONLY the first enemy in range
                         tempEnemy=myBoard.getEnemy(j);
                         if(tempTower->isInRange(tempEnemy) && !tempEnemy->isDead() && clock%tempTower->getFiringRate()==0) {
+#ifdef DEBUG
                             cerr << "Targeted enemy health: " << tempEnemy->getHealth() << endl;
+#endif
                             tempTower->fire(tempEnemy);
                             nxtSpot = tempEnemy->nextSpace(myBoard.getGrid());
                             switch(nxtSpot){
@@ -213,13 +222,16 @@ void MyPaint::paintEvent(QPaintEvent *) {
                 double fadingFactor;
                 //painter.setBrush(Qt::red); //change for different enemy types in final project
                 //go through all enemies
-                for(int i = 0; i < numEnemies; i++) {
+
+                for(int i = 0; i < myBoard.enemyListSize(); i++) {
                     temp = myBoard.getEnemy(i);
                     if(!temp->isDead()) {
+
                         //this variable determines how dark an enemy should be, based on the proportion of max health/current health
                         //full health = normal color
                         //little health = almost black
                         fadingFactor = ( (double)temp->getMaxHealth()/temp->getHealth() ) * 100;
+
                         //set enemy color
                         if(temp->getEnemyType() == 'p') {
                             painter.setBrush(QColor("white").darker(fadingFactor));
@@ -260,6 +272,16 @@ void MyPaint::paintEvent(QPaintEvent *) {
                         //make the enemy move
                         if(clock%temp->getSpeed()==0)
                         temp->move(myBoard.getGrid());
+                    }
+                    else {
+                        myBoard.removeEnemy(i);
+#ifdef DEBUG
+                        cerr << "Removed enemy at index " << i << endl;
+#endif
+                        i--; //to account for removing enemy
+#ifdef DEBUG
+                        cerr << "Number of enemies left: " << myBoard.enemyListSize() << endl;
+#endif
                     }
                 }
 

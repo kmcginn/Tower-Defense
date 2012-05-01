@@ -22,6 +22,7 @@ Enemy::Enemy(int startX, int startY) {
   maxHealth = 10;
   speed = 20;
   enemyType = 'p';
+  enemyValue = 50;
 }
 
 int Enemy::getPosX() {                          // returns x position of enemy
@@ -40,6 +41,10 @@ int Enemy::getSpeed() {                         // returns speed of enemy
   return speed;
 }
 
+int Enemy::getEnemyValue(){
+    return enemyValue;
+}
+
 void Enemy::initHealth(int startHealth) {
     health = startHealth;
     maxHealth = startHealth;
@@ -51,6 +56,10 @@ void Enemy::initSpeed(int startSpeed) {
 
 void Enemy::initType(char startType) {
     enemyType = startType;
+}
+
+void Enemy::initValue(int startValue) {
+    enemyValue = startValue;
 }
 
 int Enemy::getHealth() {                        // returns health of enemy

@@ -135,6 +135,15 @@ int Board::enemyListSize(){                    // returns number of enemies
     return(enemyList.size());
 }
 
+void Board::removeEnemy(int index) { //removes enemy at the given index, gives player money for kill
+
+    //add money based on enemy's worth
+    addMoney(getEnemy(index)->getEnemyValue());
+    //remove enemy from list
+    enemyList.erase(enemyList.begin()+index);
+
+}
+
 Tower * Board::getTower(int index) {
     return(towerList[index]);
 }

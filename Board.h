@@ -30,22 +30,29 @@ class Board
   void display();
   void gridPrint(); //prints the grid to the terminal (for testing)
   int readFail(); //returns whether or not reading the map failed
+
   int getHoriz(); //returns number of cells horizontally
   int getVert(); //returns number of cells vertically
   char getCell(int, int); //returns content of cell in grid
+
   void addTower(Tower *); //adds tower pointer to towerlist
   int findTower(int, int); // returns pointer to tower based on location
 
   int isMoving(); //returns whether or not the enemies/towers are moving
   void startMoving(); //causes the enemies/towers to start moving
   void stopMoving(); //causes the enemies/towers to stop moving
+
   Enemy * getEnemy(int); //returns enemy at index in enemy list
   int enemyListSize(); //returns size of enemy list
-  void addEnemy(char); //adds an enemy to the board
+  void addEnemy(char); //adds an enemy to the board of the specifed type
+  void removeEnemy(int); //removes the enemy from the board at the given index in the list, adds money for the kill
+
   Tower * getTower(int); //returns the tower at index in tower list
   int towerListSize(); //returns size of tower list
+
   vector<vector<char> > getGrid(); //returns the grid underlying the board
   void setGrid(char,int,int); // set grid spot to some char
+
   void basicTowerClick(); // the basic tower button has been clicked
   int isBasicTowerButtonClicked(); // returns value of basicTowerButton
   void quickTowerClick(); //indicates the quickTowerButton has been clicked

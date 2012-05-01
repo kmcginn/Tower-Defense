@@ -21,6 +21,7 @@ Speedy::Speedy(int startX, int startY, int wave) : Enemy(startX, startY) {      
     initHealth(7*pow(1.5,wave-1));                                                 // type "Puny"
     initSpeed(10);
     initType('s');
+    initValue(75);
 }
 
 
