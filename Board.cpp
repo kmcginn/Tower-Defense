@@ -19,6 +19,8 @@
 #include "Speedy.h"
 #include "Quick.h"
 
+//#define DEBUG
+
 using namespace std;
 
 Board::Board(const char * filename)    // constructor takes file to be read as a parameter
@@ -216,7 +218,9 @@ void Board::addTower(Tower * newTower) {
         loseMoney(newTower->getCost());
     }
     else {
+#ifdef DEBUG
         cerr << "You don't have enough money!" << endl; //NOTE: CHANGE THIS TO POPUP?
+#endif
     }
 }
 

@@ -55,6 +55,12 @@ void MyPaint::paintEvent(QPaintEvent *) {
         cerr << " you got: " << myBoard.getMoney() << endl;
  #endif
 
+        if(myBoard.getLives() == 0) {
+            myBoard.stopMoving();
+#ifdef DEBUG
+            cerr << "You lose!" << endl; //change this to popup or something
+#endif
+        }
 
         QPainter painter(this);  //! get a painter object to send drawing commands to
 	 
@@ -103,7 +109,8 @@ void MyPaint::paintEvent(QPaintEvent *) {
                             break;
                         //tile is base
                         case 'B':
-                        painter.setBrush(QColor("lime").lighter(100*(myBoard.getLives()+1)/6));
+                            //base color darkens as number of lives decreases
+                            painter.setBrush(QColor("lime").lighter(100*(myBoard.getLives()+1)/6));
                             break;
                         //tile is unknown type
                         default:
@@ -268,10 +275,12 @@ void MyPaint::paintEvent(QPaintEvent *) {
 
                         //check to see if enemy has reached the base
                         if(myBoard.getCell(temp->getPosY(), temp->getPosX()) == 'B') {
+#ifdef DEBUG
                             cerr << "Removing Enemy!" << endl;
+#endif
                             myBoard.removeEnemy(i, 0); //remove enemy from board, was not killed by player
                             myBoard.loseLife();
-                            i--;
+                            i--; //decrement i to account for enemy's removal
 
                         }
 
@@ -386,12 +395,17 @@ void MyPaint::paintEvent(QPaintEvent *) {
                 painter.drawRect(21*cellDim, cellDim*(numRows+3.5), 3*cellDim, cellDim);
             }
 
-            //draws text for lives and money remaining
+            //draws text for lives, current wave, and money remaining
             painter.setPen(Qt::black);
-            char message[50];
-            sprintf(message, "Lives: %d      Wallet: $%d", myBoard.getLives(), myBoard.getMoney());
+            char message[200];
+            if(myBoard.getLives() > 0){
+                sprintf(message, "Lives: %d       Wave: %d      Wallet: $%d", myBoard.getLives(), myBoard.getWave() -1, myBoard.getMoney());
+            }
+            else {
+                sprintf(message, "GAME OVER   You survived until Wave %d", myBoard.getWave() - 1);
+            }
             QString livesText(message);
-            painter.drawText(cellDim, cellDim*(numRows+6), 8*cellDim, cellDim, 0, livesText);
+            painter.drawText(cellDim, cellDim*(numRows+6), cellDim*(numCols - 6), cellDim, 0, livesText);
 
 	}
 
@@ -412,8 +426,8 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
     int clickX = e->x()/cellDim;
     int clickY = e->y()/cellDim;
 
-    if(onMoveButton(e->x(), e->y())){           // when move button is clicked, the enemy starts moving
-            myBoard.startMoving();
+    if(onMoveButton(e->x(), e->y()) && myBoard.getLives() > 0){           // when move button is clicked, the enemy starts moving
+            myBoard.startMoving();                                        //IF player has lives left
             myBoard.setTowerClicked(-1);
             //cerr<<"fun: " << myBoard.isWaveDone(myBoard.getNumSpawned())<<endl;
             //cerr << myBoard.getNumSpawned() << endl;
