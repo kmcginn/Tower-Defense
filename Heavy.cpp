@@ -19,6 +19,7 @@ using namespace std;
 Heavy::Heavy(int startX, int startY, int wave) : Enemy(startX, startY) {        // constructor; uses member initialization sytax to create an enemy of
     initHealth(30*pow(1.5,wave-1)); //double health of puny                           // type "Heavy"
     initSpeed(40); //half speed of puny
+    initType('h');
 }
 
 

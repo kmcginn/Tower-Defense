@@ -21,6 +21,7 @@ Enemy::Enemy(int startX, int startY) {
   health = 10; //default values, can be changed by child classes
   maxHealth = 10;
   speed = 20;
+  enemyType = 'p';
 }
 
 int Enemy::getPosX() {                          // returns x position of enemy
@@ -48,12 +49,20 @@ void Enemy::initSpeed(int startSpeed) {
     speed = startSpeed;
 }
 
+void Enemy::initType(char startType) {
+    enemyType = startType;
+}
+
 int Enemy::getHealth() {                        // returns health of enemy
   return health;
 }
 
 int Enemy::getMaxHealth() {                     // returns the maximum health
   return maxHealth;
+}
+
+char Enemy::getEnemyType() {
+    return enemyType;
 }
 
 void Enemy::loseHealth(int damageTaken) {       // depletes health of enemy

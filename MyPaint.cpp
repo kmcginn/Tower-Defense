@@ -42,8 +42,7 @@ MyPaint::MyPaint(QWidget *parent)
 // This method is called when the widget needs to be redrawn.
 //
 void MyPaint::paintEvent(QPaintEvent *) {
-    cerr << " you got: " << myBoard.getMoney() << endl;
-
+        cerr << " you got: " << myBoard.getMoney() << endl;
 
         QPainter painter(this);  //! get a painter object to send drawing commands to
 	 
@@ -211,11 +210,29 @@ void MyPaint::paintEvent(QPaintEvent *) {
                 //drawing enemies
                 Enemy * temp;
                 char nxt;
-                painter.setBrush(Qt::red); //change for different enemy types in final project
+                double fadingFactor;
+                //painter.setBrush(Qt::red); //change for different enemy types in final project
                 //go through all enemies
                 for(int i = 0; i < numEnemies; i++) {
                     temp = myBoard.getEnemy(i);
                     if(!temp->isDead()) {
+                        //this variable determines how dark an enemy should be, based on the proportion of max health/current health
+                        //full health = normal color
+                        //little health = almost black
+                        fadingFactor = ( (double)temp->getMaxHealth()/temp->getHealth() ) * 100;
+                        //set enemy color
+                        if(temp->getEnemyType() == 'p') {
+                            painter.setBrush(QColor("white").darker(fadingFactor));
+                        }
+                        else if(temp->getEnemyType() == 'h') {
+                            painter.setBrush(QColor("red").darker(fadingFactor));
+                        }
+                        else if(temp->getEnemyType() == 's') {
+                            painter.setBrush(QColor("blue").darker(fadingFactor));
+                        }
+                        else {
+                            painter.setBrush(Qt::cyan); //unknown type
+                        }
                         nxt = temp->nextSpace(myBoard.getGrid());
                         //draw ellipse to represent enemy
                         switch(nxt){
