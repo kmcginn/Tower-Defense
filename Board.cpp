@@ -27,6 +27,8 @@ Board::Board(const char * filename)    // constructor takes file to be read as a
   readError = 0;
   enemiesMoving = 0;
   basicTowerButton = 0;
+  quickTowerButton = 0;
+  fireTowerButton = 0;
   towerClicked=-1;
   numSpawned=0;
   wave=1;
@@ -149,21 +151,61 @@ void Board::setGrid(char type, int x, int y){
     grid[y][x]=type;
 }
 
-void Board::basicTowerClick(){ // flips basisTowerButton value
+void Board::basicTowerClick(){ // flips basicTowerButton value, deactiaves all others
     if (basicTowerButton)
         basicTowerButton=0;
     else
         basicTowerButton=1;
+
+    //deactivate all other buttons
+    quickTowerButton = 0;
+    fireTowerButton = 0;
 }
 
 int Board::isBasicTowerButtonClicked(){
     return basicTowerButton;
 }
 
+void Board::quickTowerClick() { //flips quickTowerButton value, deactivates all others
+    if(quickTowerButton)
+        quickTowerButton = 0;
+    else
+        quickTowerButton = 1;
+
+    //deactivate all other buttons
+    basicTowerButton = 0;
+    fireTowerButton = 0;
+
+}
+
+int Board::isQuickTowerButtonClicked(){
+    return quickTowerButton;
+}
+
+void Board::fireTowerClick() {
+    if(fireTowerButton)
+        fireTowerButton = 0;
+    else
+        fireTowerButton = 1;
+
+    //deactivate all other buttons
+    basicTowerButton = 0;
+    quickTowerButton = 0;
+}
+
+int Board::isFireTowerButtonClicked(){
+    return fireTowerButton;
+}
+
 void Board::addTower(Tower * newTower) {
-    towerList.push_back(newTower);
-    setGrid('T',newTower->getPosX(),newTower->getPosY());
-    loseMoney(newTower->getCost());
+    if(this->getMoney() >= newTower->getCost()) {
+        towerList.push_back(newTower);
+        setGrid('T',newTower->getPosX(),newTower->getPosY());
+        loseMoney(newTower->getCost());
+    }
+    else {
+        cerr << "You don't have enough money!" << endl; //NOTE: CHANGE THIS TO POPUP?
+    }
 }
 
 int Board::findTower(int x, int y){

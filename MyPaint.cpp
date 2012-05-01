@@ -13,19 +13,22 @@
 #include "MyPaint.h"
 #include "Quick.h"
 #include "Basic.h"
+#include "Fire.h"
 #include "Tower.h"
 #include <QtGui>
 #include <iostream>
 #include <fstream>
 #include <cmath>
-#include <typeinfo>
 #include <unistd.h>
 using namespace std;
 
 
 // constructor
 MyPaint::MyPaint(QWidget *parent)
-    : QWidget(parent), myBoard(":/map1.txt"), grassMap(":/grass_beta.png"), grassBrush(grassMap) {
+    : QWidget(parent), myBoard(":/map1.txt"),
+      grassMap(":/grass_beta.png"), grassBrush(grassMap),
+      basicButtonMap(":/basic_button_beta.png"), basicButtonBrush(basicButtonMap),
+      pathMap(":/path.png"), pathBrush(pathMap){
      setWindowTitle(tr("Tower Defense"));
      windowHorizontal = 512;
      windowVertical = 512;
@@ -77,7 +80,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
                             break;
                         //tile is for enemies
                         case 'P':
-                            painter.setBrush(Qt::yellow);
+                            painter.setBrush(pathBrush);
                             break;
                         //tile is for nothing (hole)
                         case 'H':
@@ -134,7 +137,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
 
 
 
-            //if enemies are moving, draw them
+            //if waves are going, have turrets attack enemies and draw/animate the enemies
             if(myBoard.isMoving()){
                  //cerr << myBoard.isWaveDone(myBoard.getNumSpawned()) << endl;
                 if (!myBoard.isWaveDone(myBoard.getNumSpawned()) && clock%20 == 1) {
@@ -160,6 +163,9 @@ void MyPaint::paintEvent(QPaintEvent *) {
                 char nxtSpot;
                 Tower *tempTower;
                 Enemy *tempEnemy;
+
+                //targeting/firing at enemies
+
                 //go through all the towers
                 for (int i = 0; i < numTowers; i++) {
                     //go through all the enemies
@@ -202,7 +208,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
                     }
                 }
 
-
+                //drawing enemies
                 Enemy * temp;
                 char nxt;
                 painter.setBrush(Qt::red); //change for different enemy types in final project
@@ -241,7 +247,6 @@ void MyPaint::paintEvent(QPaintEvent *) {
                 }
 
                 usleep(50000);
-                //sleep(.1); //change duration later
                 if (clock>=1000){
                     clock=1;
                 }
@@ -256,13 +261,36 @@ void MyPaint::paintEvent(QPaintEvent *) {
             painter.drawRect(cellDim, cellDim*(numRows + 2), 5*cellDim, 3*cellDim);
 
             //draws button for basic tower
-            painter.setBrush(Qt::black);
-            painter.drawRect(7*cellDim, cellDim*(numRows + 2), 2*cellDim, 2*cellDim);
-                //button indicator
+            painter.setBrush(basicButtonBrush);
             if (myBoard.isBasicTowerButtonClicked()) {
                 painter.setPen(Qt::red);
-                painter.drawRect(7*cellDim, cellDim*(numRows + 2), 2*cellDim, 2*cellDim);
+                //painter.drawRect(7*cellDim, cellDim*(numRows + 2), 2*cellDim, 2*cellDim);
             }
+            else {
+                painter.setPen(Qt::black);
+            }
+            painter.drawRect(7*cellDim, cellDim*(numRows + 2), 2*cellDim, 2*cellDim);
+
+
+            //draws button for quick tower
+            painter.setBrush(Qt::blue); //CHANGE TO IMAGE
+            if(myBoard.isQuickTowerButtonClicked()) {
+                painter.setPen(Qt::red);
+            }
+            else {
+                painter.setPen(Qt::black);
+            }
+            painter.drawRect(10*cellDim, cellDim*(numRows+2), 2*cellDim, 2*cellDim);
+
+            //draws button for fire tower
+            painter.setBrush(Qt::red); //CHANGE TO IMAGE
+            if(myBoard.isFireTowerButtonClicked()){
+                painter.setPen(Qt::red);
+            }
+            else{
+                painter.setPen(Qt::black);
+            }
+            painter.drawRect(13*cellDim, cellDim*(numRows+2), 2*cellDim, 2*cellDim);
 
             //draws upgrade buttons
             if (myBoard.isTowerClicked()) {
@@ -307,23 +335,44 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
     else if(onBasicTowerButton(e->x(), e->y())){           // when move button is clicked, the ememy strts moving
         myBoard.basicTowerClick();
         myBoard.setTowerClicked(-1);
-
-}
-    /*
-    else{
-        myBoard.stopMoving();                   // a click anywhere else stops the enemy
     }
-    */
+    else if(onQuickTowerButton(e->x(), e->y())) {
+        myBoard.quickTowerClick();
+        myBoard.setTowerClicked(-1);
+    }
+
+    else if(onFireTowerButton(e->x(), e->y())){
+        myBoard.fireTowerClick();
+        myBoard.setTowerClicked(-1);
+    }
+
     else if (myBoard.isBasicTowerButtonClicked()){ //need to check if within bounds of board, or on a path, or on a black space
         //cerr << "Clicked on the board after clicking tower button" << endl;
 
         //if valid square is selected (on the board, cell is an X)
         if(clickX >= 0 && clickX < numCols && clickY >= 0 && clickY < numRows && myBoard.getCell(clickY, clickX) == 'X') {
-            myBoard.addTower(new Basic(clickX, clickY));
+            myBoard.addTower(new Basic(clickX, clickY)); //add basic tower to board
         }
         myBoard.setTowerClicked(-1);
 
     }
+    else if(myBoard.isQuickTowerButtonClicked()) { //quick tower button is active (placing a quick tower)
+
+         //check that click is a valid space for a tower located within the grid
+        if(clickX >= 0 && clickX < numCols && clickY >= 0 && clickY < numRows && myBoard.getCell(clickY, clickX) == 'X'){
+            myBoard.addTower(new Quick(clickX, clickY)); //add quick tower to board
+        }
+        myBoard.setTowerClicked(-1); //deselect current tower, if any
+    }
+
+    else if(myBoard.isFireTowerButtonClicked()) {
+
+        if(clickX >= 0 && clickX < numCols && clickY >= 0 && clickY < numRows && myBoard.getCell(clickY, clickX) == 'X'){
+            myBoard.addTower(new Fire(clickX, clickY)); //add fire tower to board
+        }
+        myBoard.setTowerClicked(-1); //deselect current tower, if any
+    }
+
     else if (myBoard.findTower(clickX,clickY)!=-1) { // if a tower is clicked
         myBoard.setTowerClicked(myBoard.findTower(e->x()/cellDim,e->y()/cellDim));
 
@@ -384,4 +433,23 @@ int MyPaint::onBasicTowerButton(int x, int y) {           // detects if the mous
         return 0;
     }
 
+}
+
+int MyPaint::onQuickTowerButton(int x, int y) {
+
+    if( x >= 10*cellDim && x<=12*cellDim && y >= cellDim*(numRows+2) && y <= cellDim*(numRows+4) ) {
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+int MyPaint::onFireTowerButton(int x, int y) {
+    if( x >= 13*cellDim && x<=15*cellDim && y >= cellDim*(numRows+2) && y <= cellDim*(numRows+4)) {
+        return 1;
+    }
+    else{
+        return 0;
+    }
 }

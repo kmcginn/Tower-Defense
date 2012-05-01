@@ -48,6 +48,10 @@ class Board
   void setGrid(char,int,int); // set grid spot to some char
   void basicTowerClick(); // the basic tower button has been clicked
   int isBasicTowerButtonClicked(); // returns value of basicTowerButton
+  void quickTowerClick(); //indicates the quickTowerButton has been clicked
+  int isQuickTowerButtonClicked(); //returns vales of quickTowerButton
+  void fireTowerClick();
+  int isFireTowerButtonClicked();
   int isTowerClicked(); //returns if a tower is clicked
   Tower * getTowerClicked(); //returns tower that is currently clicked
   void setTowerClicked(int); // sets towerClicked to inputted int
@@ -72,7 +76,9 @@ class Board
                            // 0 for nothing. or something 
   int readError; //boolean, whether or not there was an error reading map
   int enemiesMoving; //boolean, whether or not enemies are movin
-  int basicTowerButton; // boolean, wether or not the basic button is clicked
+  int basicTowerButton; // boolean, whether or not the basic tower button is clicked
+  int quickTowerButton; //boolean, whether or not the quick tower button is clicked
+  int fireTowerButton; //boolean, whether or not the fire tower button is clicked
   int towerClicked; // what tower is clicked, -1 for none
   int wave; //wave number
   int waveDone; //whether or not the wave is done
