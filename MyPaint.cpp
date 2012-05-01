@@ -19,6 +19,7 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include <cstdio>
 #include <unistd.h>
 
 #define DEBUG
@@ -34,7 +35,7 @@ MyPaint::MyPaint(QWidget *parent)
       holeMap(":/hole.png"){
      setWindowTitle(tr("Tower Defense"));
      windowHorizontal = 512;
-     windowVertical = 512;
+     windowVertical = 550;
      cellDim = windowHorizontal / myBoard.getHoriz();
      numRows = myBoard.getVert();
      numCols = myBoard.getHoriz();
@@ -321,6 +322,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
 
             //draws the button for making the enemies move
             painter.setBrush(Qt::blue);
+            painter.setPen(Qt::black);
             painter.drawRect(cellDim, cellDim*(numRows + 2), 5*cellDim, 3*cellDim);
 
             //draws button for basic tower
@@ -357,6 +359,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
             //draws upgrade and sell buttons if a tower is selected
             if (myBoard.isTowerClicked()) {
                 //draw menu box
+                painter.setPen(Qt::black);
                 painter.setBrush(Qt::white);
                 painter.drawRect(20*cellDim, cellDim*(numRows+1),5*cellDim,4*cellDim);
 
@@ -370,6 +373,13 @@ void MyPaint::paintEvent(QPaintEvent *) {
                 painter.setBrush(Qt::red);
                 painter.drawRect(21*cellDim, cellDim*(numRows+3.5), 3*cellDim, cellDim);
             }
+
+            //draws text for lives and money remaining
+            painter.setPen(Qt::black);
+            char message[50];
+            sprintf(message, "Lives: %d      Wallet: $%d", myBoard.getLives(), myBoard.getMoney());
+            QString livesText(message);
+            painter.drawText(cellDim, cellDim*(numRows+6), 8*cellDim, cellDim, 0, livesText);
 
 	}
 

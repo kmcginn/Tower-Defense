@@ -314,7 +314,9 @@ int Board::getLives() {
 }
 
 void Board::addLife(){
-    lives++;
+    if(getLives() < 10){
+        lives++;
+    }
 }
 
 void Board::loseLife() {
