@@ -34,6 +34,7 @@ Board::Board(const char * filename)    // constructor takes file to be read as a
   wave=1;
   waveDone=1;
   money = 300;
+  lives = 5;
 
   //populate list with enemies (for now, just one)
   //enemyList.push_back(new Puny(1, 0));
@@ -227,6 +228,11 @@ int Board::findTower(int x, int y){
     return -1;
 }
 
+void Board::sellTower(int index) { //refunds 3/4 the cost of tower at given index, removes it from towerList
+    addMoney(getTower(index)->getCost()*3/4); //refund 3/4 the cost
+    towerList.erase(towerList.begin()+index); //remove tower from the list
+}
+
 int Board::isTowerClicked(){
     if (towerClicked==-1) return 0;
     else return 1;
@@ -234,6 +240,10 @@ int Board::isTowerClicked(){
 
 Tower * Board::getTowerClicked() {
     return towerList[towerClicked];
+}
+
+int Board::getTowerClickedIndex() {
+    return towerClicked;
 }
 
 void Board::setTowerClicked(int num) {
@@ -297,4 +307,17 @@ void Board::addMoney(int amt) {
 
 void Board::loseMoney(int amt) {
     money-=amt;
+}
+
+int Board::getLives() {
+    return lives;
+}
+
+void Board::addLife(){
+    lives++;
+}
+
+void Board::loseLife() {
+    if(lives > 0)
+        lives--;
 }

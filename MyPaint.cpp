@@ -220,6 +220,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
                 Enemy * temp;
                 char nxt;
                 double fadingFactor;
+                double contMoveFactor;
                 //painter.setBrush(Qt::red); //change for different enemy types in final project
                 //go through all enemies
 
@@ -246,25 +247,30 @@ void MyPaint::paintEvent(QPaintEvent *) {
                             painter.setBrush(Qt::cyan); //unknown type
                         }
                         nxt = temp->nextSpace(myBoard.getGrid());
+
+
+                        //this variable helps the enemy move continously from one cell to the next
+                        contMoveFactor = ((clock-1)%temp->getSpeed())*cellDim/(double)temp->getSpeed();
+
                         //draw ellipse to represent enemy
                         switch(nxt){
                         case 'd':
                         painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4,
-                                            cellDim*temp->getPosY() + cellDim/4 +((clock-1)%temp->getSpeed())*cellDim/(double)temp->getSpeed(),
+                                            cellDim*temp->getPosY() + cellDim/4 + contMoveFactor,
                                             cellDim/2, cellDim/2 );
                         break;
                         case 'u':
                         painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4,
-                                            cellDim*temp->getPosY() + cellDim/4 - ((clock-1)%temp->getSpeed())*cellDim/(double)temp->getSpeed(),
+                                            cellDim*temp->getPosY() + cellDim/4 - contMoveFactor,
                                             cellDim/2, cellDim/2 );
                         break;
                         case 'r':
-                        painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4 + ((clock-1)%temp->getSpeed())*cellDim/(double)temp->getSpeed(),
+                        painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4 + contMoveFactor,
                                             cellDim*temp->getPosY() + cellDim/4,
                                             cellDim/2, cellDim/2 );
                         break;
                         case 'l':
-                        painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4 - ((clock-1)%temp->getSpeed())*cellDim/(double)temp->getSpeed(),
+                        painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4 - contMoveFactor,
                                             cellDim*temp->getPosY() + cellDim/4,
                                             cellDim/2, cellDim/2 );
                         break;
@@ -331,16 +337,21 @@ void MyPaint::paintEvent(QPaintEvent *) {
             }
             painter.drawRect(13*cellDim, cellDim*(numRows+2), 2*cellDim, 2*cellDim);
 
-            //draws upgrade buttons
+            //draws upgrade and sell buttons if a tower is selected
             if (myBoard.isTowerClicked()) {
+                //draw menu box
                 painter.setBrush(Qt::white);
                 painter.drawRect(20*cellDim, cellDim*(numRows+1),5*cellDim,4*cellDim);
 
+                //draw upgrade buttons
                 painter.setBrush(Qt::blue);
                 painter.drawRect(21*cellDim, cellDim*(numRows+2),.9*cellDim,1*cellDim);
                 painter.drawRect(22*cellDim, cellDim*(numRows+2),.9*cellDim,1*cellDim);
                 painter.drawRect(23*cellDim, cellDim*(numRows+2),.9*cellDim,1*cellDim);
 
+                //draw sell button
+                painter.setBrush(Qt::red);
+                painter.drawRect(21*cellDim, cellDim*(numRows+3.5), 3*cellDim, cellDim);
             }
 
 	}
@@ -382,6 +393,13 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
 
     else if(onFireTowerButton(e->x(), e->y())){
         myBoard.fireTowerClick();
+        myBoard.setTowerClicked(-1);
+    }
+
+    else if(onSellButton(e->x(), e->y()) && myBoard.isTowerClicked()) {
+        //cerr << "Successful sell click!" << endl;
+        myBoard.setGrid('H', myBoard.getTowerClicked()->getPosX(), myBoard.getTowerClicked()->getPosY());
+        myBoard.sellTower(myBoard.getTowerClickedIndex());
         myBoard.setTowerClicked(-1);
     }
 
@@ -440,6 +458,9 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
         //cerr << "an upgrade has been clicked" << endl;
 
     }
+    else { //random click with no effect
+        myBoard.setTowerClicked(-1); //deselect current tower
+    }
     //cerr << clickX << " " << clickY << endl;
     //cerr << cellDim*21 << " " << cellDim*(numRows+2) << endl;
         //  The update() function belongs to the QWidget parent class, and instructs the window
@@ -489,6 +510,15 @@ int MyPaint::onFireTowerButton(int x, int y) {
         return 1;
     }
     else{
+        return 0;
+    }
+}
+
+int MyPaint::onSellButton(int x, int y) {
+    if( x >= 21*cellDim && x <= 24*cellDim && y >= cellDim*(numRows+3.5) && y <= cellDim*(numRows+4.5)) {
+        return 1;
+    }
+    else {
         return 0;
     }
 }

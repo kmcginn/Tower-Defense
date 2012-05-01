@@ -37,6 +37,7 @@ class Board
 
   void addTower(Tower *); //adds tower pointer to towerlist
   int findTower(int, int); // returns pointer to tower based on location
+  void sellTower(int); //returns 3/4 tower cost, removes tower at given index from TowerList
 
   int isMoving(); //returns whether or not the enemies/towers are moving
   void startMoving(); //causes the enemies/towers to start moving
@@ -61,6 +62,7 @@ class Board
   int isFireTowerButtonClicked();
   int isTowerClicked(); //returns if a tower is clicked
   Tower * getTowerClicked(); //returns tower that is currently clicked
+  int getTowerClickedIndex(); //returns index in TowerList of tower that is currently clicked
   void setTowerClicked(int); // sets towerClicked to inputted int
 
   int getWave(); // returns wave number
@@ -70,9 +72,14 @@ class Board
   int getNumSpawned(); //returns number of enemies spawned in current wave
   void nextSpawned(); //increment number of enemies spawned by one
   void resetNumSpawned(); //sets numSpawned back to one;
+
   int getMoney();
   void addMoney(int);
   void loseMoney(int);
+
+  int getLives();
+  void addLife();
+  void loseLife();
 
  private:
   //data
@@ -90,7 +97,8 @@ class Board
   int wave; //wave number
   int waveDone; //whether or not the wave is done
   int numSpawned; //number of enemies spawned so far, within wave
-  int money;
+  int money; //amount of money the player has for building and upgrading towers
+  int lives; //number of lives player has left
 };
   
 #endif
