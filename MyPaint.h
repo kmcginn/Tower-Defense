@@ -53,10 +53,12 @@ private:
         QPixmap grassMap;
         QPixmap basicButtonMap;
         QPixmap pathMap;
+        QPixmap holeMap;
         //brushes
         QBrush grassBrush;
         QBrush basicButtonBrush;
         QBrush pathBrush;
+        QBrush holeBrush;
 };
 
 #endif

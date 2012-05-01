@@ -28,9 +28,10 @@ using namespace std;
 // constructor
 MyPaint::MyPaint(QWidget *parent)
     : QWidget(parent), myBoard(":/map1.txt"),
-      grassMap(":/grass_beta.png"), grassBrush(grassMap),
-      basicButtonMap(":/basic_button_beta.png"), basicButtonBrush(basicButtonMap),
-      pathMap(":/path.png"), pathBrush(pathMap){
+      grassMap(":/grass_beta.png"),
+      basicButtonMap(":/basic_button_beta.png"),
+      pathMap(":/path.png"),
+      holeMap(":/hole.png"){
      setWindowTitle(tr("Tower Defense"));
      windowHorizontal = 512;
      windowVertical = 512;
@@ -39,6 +40,11 @@ MyPaint::MyPaint(QWidget *parent)
      numCols = myBoard.getHoriz();
      resize(windowHorizontal, windowVertical);
      clock=0;
+
+     grassBrush.setTexture(grassMap);
+     basicButtonBrush.setTexture(basicButtonMap);
+     pathBrush.setTexture(pathMap);
+     holeBrush.setTexture(holeMap);
 }
 
 // This method is called when the widget needs to be redrawn.
@@ -88,7 +94,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
                             break;
                         //tile is for nothing (hole)
                         case 'H':
-                            painter.setBrush(Qt::white);
+                            painter.setBrush(holeBrush);
                             break;
                         //tile is for tower
                         case 'T':
