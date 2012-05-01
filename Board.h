@@ -46,7 +46,7 @@ class Board
   Enemy * getEnemy(int); //returns enemy at index in enemy list
   int enemyListSize(); //returns size of enemy list
   void addEnemy(char); //adds an enemy to the board of the specifed type
-  void removeEnemy(int); //removes the enemy from the board at the given index in the list, adds money for the kill
+  void removeEnemy(int, int); //removes the enemy from the board at the given index in the list, adds money if player killed enemy
 
   Tower * getTower(int); //returns the tower at index in tower list
   int towerListSize(); //returns size of tower list

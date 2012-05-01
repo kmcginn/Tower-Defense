@@ -103,7 +103,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
                             break;
                         //tile is base
                         case 'B':
-                            painter.setBrush(Qt::green);
+                        painter.setBrush(QColor("lime").lighter(100*(myBoard.getLives()+1)/6));
                             break;
                         //tile is unknown type
                         default:
@@ -265,41 +265,53 @@ void MyPaint::paintEvent(QPaintEvent *) {
                         else {
                             painter.setBrush(Qt::cyan); //unknown type
                         }
-                        nxt = temp->nextSpace(myBoard.getGrid());
 
+                        //check to see if enemy has reached the base
+                        if(myBoard.getCell(temp->getPosY(), temp->getPosX()) == 'B') {
+                            cerr << "Removing Enemy!" << endl;
+                            myBoard.removeEnemy(i, 0); //remove enemy from board, was not killed by player
+                            myBoard.loseLife();
+                            i--;
 
-                        //this variable helps the enemy move continously from one cell to the next
-                        contMoveFactor = ((clock-1)%temp->getSpeed())*cellDim/(double)temp->getSpeed();
-
-                        //draw ellipse to represent enemy
-                        switch(nxt){
-                        case 'd':
-                        painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4,
-                                            cellDim*temp->getPosY() + cellDim/4 + contMoveFactor,
-                                            cellDim/2, cellDim/2 );
-                        break;
-                        case 'u':
-                        painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4,
-                                            cellDim*temp->getPosY() + cellDim/4 - contMoveFactor,
-                                            cellDim/2, cellDim/2 );
-                        break;
-                        case 'r':
-                        painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4 + contMoveFactor,
-                                            cellDim*temp->getPosY() + cellDim/4,
-                                            cellDim/2, cellDim/2 );
-                        break;
-                        case 'l':
-                        painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4 - contMoveFactor,
-                                            cellDim*temp->getPosY() + cellDim/4,
-                                            cellDim/2, cellDim/2 );
-                        break;
                         }
-                        //make the enemy move
-                        if(clock%temp->getSpeed()==0)
-                        temp->move(myBoard.getGrid());
+
+                        else { //enemy has not reached base
+                            nxt = temp->nextSpace(myBoard.getGrid());
+
+
+                            //this variable helps the enemy move continously from one cell to the next
+                            contMoveFactor = ((clock-1)%temp->getSpeed())*cellDim/(double)temp->getSpeed();
+
+                            //draw ellipse to represent enemy
+                            switch(nxt){
+                                case 'd':
+                                painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4,
+                                                    cellDim*temp->getPosY() + cellDim/4 + contMoveFactor,
+                                                    cellDim/2, cellDim/2 );
+                                break;
+                                case 'u':
+                                painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4,
+                                                    cellDim*temp->getPosY() + cellDim/4 - contMoveFactor,
+                                                    cellDim/2, cellDim/2 );
+                                break;
+                                case 'r':
+                                painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4 + contMoveFactor,
+                                                    cellDim*temp->getPosY() + cellDim/4,
+                                                    cellDim/2, cellDim/2 );
+                                break;
+                                case 'l':
+                                painter.drawEllipse(cellDim*temp->getPosX() + cellDim/4 - contMoveFactor,
+                                                    cellDim*temp->getPosY() + cellDim/4,
+                                                    cellDim/2, cellDim/2 );
+                                break;
+                            }
+                            //make the enemy move
+                            if(clock%temp->getSpeed()==0)
+                                temp->move(myBoard.getGrid());
+                        }
                     }
                     else { //current enemy is dead
-                        myBoard.removeEnemy(i); //remove enemy from the board
+                        myBoard.removeEnemy(i, 1); //remove enemy from the board, indicate player killed them
 #ifdef DEBUG
                         cerr << "Removed enemy at index " << i << endl;
 #endif

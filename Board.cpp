@@ -136,10 +136,12 @@ int Board::enemyListSize(){                    // returns number of enemies
     return(enemyList.size());
 }
 
-void Board::removeEnemy(int index) { //removes enemy at the given index, gives player money for kill
+void Board::removeEnemy(int index, int wasSlain) { //removes enemy at the given index, gives player money if player killed enemy
 
-    //add money based on enemy's worth
-    addMoney(getEnemy(index)->getEnemyValue());
+    if(wasSlain) {
+        //add money based on enemy's worth
+        addMoney(getEnemy(index)->getEnemyValue());
+    }
     //remove enemy from list
     enemyList.erase(enemyList.begin()+index);
 

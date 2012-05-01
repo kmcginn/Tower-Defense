@@ -79,6 +79,31 @@ void Enemy::loseHealth(int damageTaken) {       // depletes health of enemy
 }
 
 char Enemy::nextSpace(vector<vector<char> > map) {         // determines the next space for the ememy without moving it
+
+    if(yPos < map.size() && xPos < map[0].size()) { //ensure that movement down and right is within bounds of board
+
+        if((map[yPos+1][xPos] == 'P' || map[yPos+1][xPos] == 'B') && yPos+1 != yPrev) {
+            return 'd';                                   // next position is down
+        }
+
+        else if( (map[yPos][xPos+1] == 'P' || map[yPos][xPos+1] == 'B' )&& xPos+1 != xPrev) {
+            return 'r';                                   // next position is right
+        }
+
+        else if( yPos > 0 && xPos > 0) { //ensure movement up and left is within bounds of board
+
+            if( (map[yPos-1][xPos] == 'P' || map[yPos-1][xPos] == 'B') && yPos-1 != yPrev) {
+                return 'u';                                   // next position is up
+            }
+
+            else if((map[yPos][xPos-1] == 'P' || map[yPos][xPos-1] == 'B' )&& xPos-1 != xPrev) {
+                return 'l';                                   // next position is left
+            }
+        }
+
+    }
+
+    /*
     if(map[yPos+1][xPos] == 'P' && yPos+1 != yPrev) {
         return 'd';                                   // next position is down
     }
@@ -91,27 +116,41 @@ char Enemy::nextSpace(vector<vector<char> > map) {         // determines the nex
     else if(map[yPos][xPos-1] == 'P' && xPos-1 != xPrev) {
         return 'l';                                   // next position is left
     }
+    */
 
 }
 
 
 
 void Enemy::move(vector<vector<char> > map) {           // moves enemy one space forward along the path
-  if(map[yPos+1][xPos] == 'P' && yPos+1 != yPrev) {
-      yPrev = yPos++;                                   // next position is down
-      xPrev = xPos;
-  }
-  else if(map[yPos-1][xPos] == 'P' && yPos-1 != yPrev) {
-      yPrev = yPos--;                                   // next position is up
-      xPrev = xPos;
-  }
-  else if(map[yPos][xPos+1] == 'P' && xPos+1 != xPrev) {
-      xPrev = xPos++;                                   // next position is right
-      yPrev = yPos;
-  }
-  else if(map[yPos][xPos-1] == 'P' && xPos-1 != xPrev) {
-      xPrev = xPos--;                                   // next position is left
-      yPrev = yPos;
-  }
 
+    //cerr << "Size of first dimension:" << map.size() << endl; //20 y
+    //cerr << "Size of second dimension:" << map[0].size() << endl; //25 x
+
+    if(yPos < map.size() && xPos < map[0].size()) { //ensure that movement down and right is within bounds of board
+
+        if((map[yPos+1][xPos] == 'P' || map[yPos+1][xPos] == 'B') && yPos+1 != yPrev) {
+            yPrev = yPos++;                                   // next position is down
+            xPrev = xPos;
+        }
+
+        else if( (map[yPos][xPos+1] == 'P' || map[yPos][xPos+1] == 'B' )&& xPos+1 != xPrev) {
+            xPrev = xPos++;                                   // next position is right
+            yPrev = yPos;
+        }
+
+        else if( yPos > 0 && xPos > 0) { //ensure movement up and left is within bounds of board
+
+            if( (map[yPos-1][xPos] == 'P' || map[yPos-1][xPos] == 'B') && yPos-1 != yPrev) {
+                yPrev = yPos--;                                   // next position is up
+                xPrev = xPos;
+            }
+
+            else if((map[yPos][xPos-1] == 'P' || map[yPos][xPos-1] == 'B' )&& xPos-1 != xPrev) {
+                xPrev = xPos--;                                   // next position is left
+                yPrev = yPos;
+            }
+        }
+
+    }
 }
