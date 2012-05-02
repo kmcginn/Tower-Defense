@@ -410,12 +410,38 @@ void MyPaint::paintEvent(QPaintEvent *) {
             }
             painter.drawRect(13*cellDim, cellDim*(numRows+2), 2*cellDim, 2*cellDim);
 
-            //draws upgrade and sell buttons if a tower is selected
+            //draws upgrade and sell buttons, tower stats if a tower is selected
             if (myBoard.isTowerClicked()) {
                 //draw menu box
                 painter.setPen(Qt::black);
                 painter.setBrush(Qt::white);
-                painter.drawRect(20*cellDim, cellDim*(numRows+1),5*cellDim,4*cellDim);
+                painter.drawRect(15.4*cellDim, cellDim*(numRows+1),9.5*cellDim,4*cellDim);
+
+                //displaying information about the tower
+
+                //init variables
+                char frMessage[200];
+                char pMessage[200];
+                char rMessage[200];
+                char sellMessage[200];
+
+                //create strings with upgrade level and cost info, or sell info
+                sprintf(frMessage, "FR: %d (+$%d)", myBoard.getTowerClicked()->getFiringRate(), myBoard.getTowerClicked()->getFRCost());
+                sprintf(pMessage, "P: %d (+$%d)", myBoard.getTowerClicked()->getPower(), myBoard.getTowerClicked()->getPCost());
+                sprintf(rMessage, "R: %d (+$%d)", myBoard.getTowerClicked()->getRange(), myBoard.getTowerClicked()->getRCost());
+                sprintf(sellMessage, "Sell: $%.2f", (0.75)*myBoard.getTowerClicked()->getCost());
+
+                //store in QString so painter can display it
+                QString frText(frMessage);
+                QString pText(pMessage);
+                QString rText(rMessage);
+                QString sellText(sellMessage);
+
+                //draw text
+                painter.drawText(cellDim*15.5, cellDim*(numRows+1), 5*cellDim, cellDim, 0, rText);
+                painter.drawText(cellDim*15.5, cellDim*(numRows+2), 5*cellDim, cellDim, 0, frText);
+                painter.drawText(cellDim*15.5, cellDim*(numRows+3), 5*cellDim, cellDim, 0, pText);
+                painter.drawText(cellDim*15.5, cellDim*(numRows+4), 5*cellDim, cellDim, 0, sellText);
 
                 //draw upgrade buttons
                 //range

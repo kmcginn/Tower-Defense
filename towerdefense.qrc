@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>map1.txt</file>
         <file>grass_beta.png</file>
         <file>path.png</file>
         <file>basic_button_beta.png</file>
@@ -13,5 +12,6 @@
         <file>PowerButton.png</file>
         <file>RangeButton.png</file>
         <file>SellButton.png</file>
+        <file>map1.txt</file>
     </qresource>
 </RCC>
