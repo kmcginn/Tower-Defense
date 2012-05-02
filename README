@@ -9,19 +9,37 @@ Chris Groce, Kevin McGinn, Nick Taylor
 
 SYSTEM REQUIREMENTS:
 ========================================================================================
-Qt 4.7.4 or later must be installed on your machine.
+Linux (tested in Ubuntu 11.10)
+Windows 7 or later WITH QtCreator installed
+Qt 4.7.4 or later
 
 INSTALLATION:
 ========================================================================================
+
+Using the provided executable:
+
+Download the Tower-Defense executable from the GitHub repository
+Run the executable and enjoy!
+
 Compiling from source code in Linux:
 
 Place all files in a folder called 'Tower-Defense'.
 
-Run: qmake-qt4 -project      || creates project files
-Run: qmake-qt4               || generates Makefile
-Run: make                    || generate executable
+Run the following commands:
+
+qmake-qt4 -project      || creates project files
+qmake-qt4               || generates Makefile
+make                    || generate executable
+
+NOTE: The compiler will issue a few warnings, but the issues are negligible
+and do not affect performance.
 
 The game can now be played by running the executable named 'Tower-Defense'.
+
+Running in Windows:
+
+At this time, the team is unable to provide an executable for use in Windows.
+The program can be built in QtCreator, and run from there.
 
 INSTRUCTIONS:
 =======================================================================================
