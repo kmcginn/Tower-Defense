@@ -4,11 +4,11 @@
 
 #include "Tower.h"
 
-class Quick : public Tower {
+class Quick : public Tower {        // inherits from  Tower base class
 
 public:
-    Quick(int placeX, int placeY);
-    void fire(Enemy *);
+    Quick(int placeX, int placeY);  // Constructor takes x and y position for the tower
+    void fire(Enemy *);     // inflicts enemies with damage based on their type
 
 };
 
