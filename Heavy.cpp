@@ -21,7 +21,7 @@ Heavy::Heavy(int startX, int startY, int wave) : Enemy(startX, startY) { // cons
     initHealth(30*pow(1.5,wave-1)); //double base health of puny                           // type "Heavy"
     initSpeed(40); //half speed of puny
     initType('h');
-    initValue(25*((wave+5)/5)); // increment value by 25 every 5 waves
+    initValue(25*((wave+3)/3)); // increment value by 25 every 5 waves
 }
 
 

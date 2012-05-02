@@ -22,7 +22,7 @@ Speedy::Speedy(int startX, int startY, int wave) : Enemy(startX, startY) { // co
     initHealth(7*pow(1.5,wave-1)); // health is based directly off of the wave                                                 // type "Puny"
     initSpeed(10);
     initType('s');
-    initValue(10*((wave+5)/5)); // value is based off of wave and goes up every 5 waves
+    initValue(10*((wave+3)/3)); // value is based off of wave and goes up every 5 waves
 }
 
 

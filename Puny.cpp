@@ -20,7 +20,7 @@ Puny::Puny(int startX, int startY, int wave) : Enemy(startX, startY) { // constr
     //initialize values
     initHealth(15*pow(1.5,wave-1));  //health is based off teh wave                                                // type "Puny"
     initType('p');
-    initValue(15*((wave+5)/5)); // value increments by 15 every 5 waves
+    initValue(15*((wave+3)/3)); // value increments by 15 every 5 waves
 }
 
 

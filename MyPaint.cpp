@@ -28,7 +28,7 @@
 #include <cstdio>
 #include <unistd.h>
 
-//#define DEBUG
+#define DEBUG
 using namespace std;
 
 
@@ -208,6 +208,11 @@ void MyPaint::paintEvent(QPaintEvent *) {
                         myBoard.resetNumSpawned();
                         myBoard.setWaveDone();
                         myBoard.nextWave();
+#ifdef DEBUG
+                        cerr<<"wave number: "<<myBoard.getWave()<<endl;
+#endif
+                        if ((myBoard.getWave()-1)%5==0) myBoard.addMoney(100);
+                        if ((myBoard.getWave()-1)%10==0) myBoard.addLife();
                     }
                 }
 
