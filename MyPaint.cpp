@@ -276,7 +276,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
                 double contMoveFactor;
 
                 //go through all enemies
-
+                painter.setPen(Qt::black);
                 for(int i = 0; i < myBoard.enemyListSize(); i++) {
                     temp = myBoard.getEnemy(i);
                     if(!temp->isDead()) {
@@ -469,7 +469,7 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
     int clickX = e->x()/cellDim;
     int clickY = e->y()/cellDim;
 
-    if(onMoveButton(e->x(), e->y()) && myBoard.getLives() > 0){           // when move button is clicked, the enemy starts moving
+    if(onMoveButton(e->x(), e->y()) && myBoard.getLives() > 0 && myBoard.isWaveDone()){           // when move button is clicked, the enemy starts moving
             myBoard.startMoving();                                        //IF player has lives left
             myBoard.setTowerClicked(-1); //deselect any towers
             //cerr<<"fun: " << myBoard.isWaveDone(myBoard.getNumSpawned())<<endl;
@@ -477,7 +477,7 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
             myBoard.setWaveDone(); //end current wave
             //cerr<<"fun: " << myBoard.isWaveDone(myBoard.getNumSpawned())<<endl;
             //myBoard.addEnemy('h');
-
+            cerr << "next wave coming" << endl;
     }
     else if(onBasicTowerButton(e->x(), e->y())){ //Basic Tower construction button is clicked
         myBoard.basicTowerClick(); //indicate button has been clicked

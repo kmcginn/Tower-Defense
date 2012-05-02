@@ -71,7 +71,9 @@ char Tower::getType() {
 
 void Tower::upgradePower(){
     power+=2;
+    cost+=powerCost;
     powerCost*=2;
+
     cerr << "Power: " << power << endl;
 
 }
@@ -79,13 +81,19 @@ void Tower::upgradePower(){
 void Tower::upgradeFiringRate(){
     if (firingRate>1) {
         firingRate-=1;
+        cost+=firingRateCost;
         firingRateCost*=2;
+
+    }
+    else {
+        cout << "You can upgrade firing rate any more" << endl;
     }
     cerr << "firingRate: " << firingRate << endl;
 }
 
 void Tower::upgradeRange(){
     range+=1;
+    cost+=rangeCost;
     rangeCost*=2;
     cerr << "Range: " << range << endl;
 

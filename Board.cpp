@@ -281,6 +281,10 @@ int Board::isWaveDone(int numEnemy) {
         return 1;
 }
 
+int Board::isWaveDone() {
+    return waveDone;
+}
+
 void Board::setWaveDone() {
     int temp=waveDone;
     if (temp==1){

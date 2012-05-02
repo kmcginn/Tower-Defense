@@ -68,6 +68,7 @@ class Board
   int getWave(); // returns wave number
   void nextWave(); //increments wave by one
   int isWaveDone(int); //checks if wave is done based off of number of enemies already sent
+  int isWaveDone(); //checks if wave is done based off of waveDone value
   void setWaveDone(); //switches waveDone between 0 and 1
   int getNumSpawned(); //returns number of enemies spawned in current wave
   void nextSpawned(); //increment number of enemies spawned by one
