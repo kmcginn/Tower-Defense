@@ -9,6 +9,9 @@
   Speedy.h
 
   This is the interface for the Speedy class, which inherits from Enemy
+
+  The Speedy enemy moves very quickly, but has low health. It takes extra damage from Quick
+  towers, but less damage from Heavy towers.
   */
 
 #ifndef SPEEDY_H

@@ -1,3 +1,19 @@
+/*
+  Chris Groce
+  Kevin McGinn
+  Nick Taylor
+
+  CSE20212
+
+  Final Revision: 5/2/2012
+
+  Fire.h
+
+  This is the interface for the Fire class, which inherits from Tower
+
+  The Fire tower has great power, but lower range
+  */
+
 #ifndef FIRE_H
 #define FIRE_H
 

@@ -1,15 +1,21 @@
 /*
 Project Group: Chris Groce, Kevin McGinn, Nick Taylor
 CSE 20212
-3/20/2012
+First version: 3/20/2012
+Final Revision: 5/2/2012
 
 Board.h
 
 This is the interface for the Board class
 
+The Board class contains information about the current state of the game,
+including vectors of all of the Enemies and Towers on the board, the player's
+lives, and the player's money
+
 X = place for tower
 P = place for enemy
 H = place for nothing (hole)
+B = place for Base
 
 */
 
@@ -26,8 +32,7 @@ class Board
 {
  public:
   Board(const char *);
-  void initMap(); //initializes the map; currently unused
-  void display();
+
   void gridPrint(); //prints the grid to the terminal (for testing)
   int readFail(); //returns whether or not reading the map failed
 

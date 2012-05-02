@@ -7,6 +7,9 @@ Tower.h
 
 This is the interface for the Tower abstract base class
 
+The Tower base class contains the information and functions common
+to all of the derived tower types, such the tower's location and functions
+for upgrading different properties
 */
 #ifndef TOWER_H
 #define TOWER_H

@@ -1,4 +1,19 @@
-//header here later
+/*
+  Chris Groce
+  Kevin McGinn
+  Nick Taylor
+
+  CSE20212
+
+  Final Revision: 5/2/2012
+
+  Quick.h
+
+  This is the interface for the Quick class, which inherits from Tower
+
+  The Quick tower starts off with a faster rate of fire, but lower power
+
+  */
 #ifndef QUICK_H
 #define QUICK_H
 

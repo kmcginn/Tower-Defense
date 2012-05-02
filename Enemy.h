@@ -1,11 +1,15 @@
 /*
 Project Group: Chris Groce, Kevin McGinn, Nick Taylor
 CSE 20212
-3/20/2012
+First version: 3/20/2012
+Final Revision: 5/2/2012
 
 Enemy.h
 
 This is the interface for the Enemy abstract base class
+
+This base class includes all of the information and functions needed
+for all the types of enemies: moving, getting properties, etc.
 
 */
 

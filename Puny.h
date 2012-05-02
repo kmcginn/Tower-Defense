@@ -5,8 +5,12 @@ CSE 20212
 
 Puny.h
 
+Final Revision: 5/2/2012
+
 This is the interface for the Puny class,
 which inherits from Enemy
+
+The Puny enemy moves at a normal speed, and takes normal damage from all Towers
 
 */
 

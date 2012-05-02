@@ -2,10 +2,14 @@
 Project Group: Chris Groce, Kevin McGinn, Nick Taylor
 CSE 20212
 
+Final Revision: 5/2/2012
+
 MyPaint.h
 
 This is the interface for the MyPaint class, which
 acts as a display for the TowerDefense game
+
+MyPaint is based off of the original file by Phil MacCart
  */
 
 #ifndef MYPAINT_H_

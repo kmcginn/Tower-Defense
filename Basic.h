@@ -1,3 +1,19 @@
+/*
+  Chris Groce
+  Kevin McGinn
+  Nick Taylor
+
+  CSE20212
+
+  Final Revision: 5/2/2012
+
+  Basic.h
+
+  This is the interface for the Basic class, which inherits from Tower
+
+  The Basic tower has decent range, power, and firing rate.
+  */
+
 #ifndef BASIC_H
 #define BASIC_H
 
