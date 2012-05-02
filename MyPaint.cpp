@@ -28,7 +28,7 @@
 #include <cstdio>
 #include <unistd.h>
 
-#define DEBUG
+//#define DEBUG
 using namespace std;
 
 
@@ -80,7 +80,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
         if(myBoard.getLives() == 0) {
             myBoard.stopMoving(); //end the progression of the enemies
 #ifdef DEBUG
-            cerr << "You lose!" << endl; //change this to popup or something
+            cerr << "You lose!" << endl;
 #endif
         }
 
@@ -98,7 +98,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
 	painter.setPen(Qt::black);
 
 	//code for displaying map, only runs if map reads correctly
-	if(!myBoard.readFail()) {
+        if(!myBoard.readFail()) {
 
             //initialize variables
             char temp;
@@ -238,6 +238,18 @@ void MyPaint::paintEvent(QPaintEvent *) {
 
                             //this variable helps the tower's shot track the enemy as it move continously
                             contShootFactor = ((clock-1)%tempEnemy->getSpeed())*cellDim/(double)tempEnemy->getSpeed();
+
+                            //choose line color based on tower type
+                            switch(tempTower->getType()) {
+                            case 'b': painter.setPen(Qt::white); //basic tower
+                                        break;
+                            case 'q': painter.setPen(Qt::blue); //quick tower
+                                        break;
+                            case 'f': painter.setPen(Qt::red); //fire tower
+                                        break;
+                            default: painter.setPen(Qt::cyan); //unknown tower type
+                                        break;
+                            }
 
                             //draw line to show tower shooting at enemy
                             switch(nxtSpot){
@@ -503,7 +515,9 @@ void MyPaint::mousePressEvent(QMouseEvent *e) {
             myBoard.setWaveDone(); //end current wave
             //cerr<<"fun: " << myBoard.isWaveDone(myBoard.getNumSpawned())<<endl;
             //myBoard.addEnemy('h');
+#ifdef DEBUG
             cerr << "next wave coming" << endl;
+#endif
     }
     else if(onBasicTowerButton(e->x(), e->y())){ //Basic Tower construction button is clicked
         myBoard.basicTowerClick(); //indicate button has been clicked

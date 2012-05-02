@@ -19,7 +19,7 @@
 #include "Speedy.h"
 #include "Quick.h"
 
-//#define DEBUG
+//#define DEBUG //flag for debugging
 
 using namespace std;
 

@@ -15,6 +15,8 @@
 #include "Board.h"
 #include "Tower.h"
 
+//#define DEBUG //flag for debugging
+
 Tower::Tower(int x, int y) { // base class tower constructor
     //initialize values
     xPos=x;
@@ -74,9 +76,9 @@ void Tower::upgradePower(){ // upgrades the power
     power*=2; // increase power
     cost+=powerCost; // increase total cost of tower
     powerCost*=2; // increase the upgrade cost for power
-
+#ifdef DEBUG
     cerr << "Power: " << power << endl;
-
+#endif
 }
 
 void Tower::upgradeFiringRate(){ // upgrades the firing rate
@@ -89,14 +91,18 @@ void Tower::upgradeFiringRate(){ // upgrades the firing rate
     else {
         cout << "You can upgrade firing rate any more" << endl;
     }
+#ifdef DEBUG
     cerr << "firingRate: " << firingRate << endl;
+#endif
 }
 
 void Tower::upgradeRange(){ // upgrades range
     range+=1; // increase range
     cost+=rangeCost; // increase total cost of tower
     rangeCost*=2; // increase upgrade cost
+#ifdef DEBUG
     cerr << "Range: " << range << endl;
+#endif
 
 }
 
