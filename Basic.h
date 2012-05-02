@@ -3,11 +3,11 @@
 
 #include "Tower.h"
 
-class Basic : public Tower {
+class Basic : public Tower {            // inherits from the Tower base class
 
 public:
-    Basic(int placeX, int placeY);
-    void fire(Enemy *);
+    Basic(int placeX, int placeY);      // constructor takes location of the tower on the screen
+    void fire(Enemy *);                 // inflicts damage on enemy based on its type
 
 };
 

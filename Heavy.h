@@ -9,8 +9,8 @@ using namespace std;
 class Heavy : public Enemy {
 
  public:
-  Heavy(int startX, int startY, int wave); //constructor
-  virtual void takeDamage(int unchangedDamage, char type); //have enemy take damage
+  Heavy(int startX, int startY, int wave); // constructor takes enemy position and the wave number
+  virtual void takeDamage(int unchangedDamage, char type); // have enemy take damage
 
 };
 
