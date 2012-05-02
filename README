@@ -35,51 +35,51 @@ WHITE.
 
 The QUICK tower is focused on rapid attacks on fast enemies; it has very good firing
 rate, decent range, but poor power. It uses a special type of ammunition that is very
-effective against fast-moving enemies, but stronger enemies are more resistant to it. It
-is BLUE.
+effective against fast-moving enemies, but stronger enemies are more resistant to it. 
+It is BLUE.
 
 The FIRE tower is built to deal damage; it has a poor firing rate, poor range, but
 very good power. Its ammunition is very effective against slower moving enemies, but
 fast enemies are able to avoid most of its damage. It is RED.
 
 ****ENEMIES****
-Each wave contains a few different types of Enemies. There are three enemy types: Puny,
-Speedy, and Heavy.
+Each wave contains a few different types of Enemies. There are three enemy types: 
+Puny, Speedy, and Heavy.
 
 The PUNY enemy is your standard enemy. It has decent speed and health, and all 
 ammunition types are equally effective against it. They are WHITE.
 
 The SPEEDY enemy has trained extra hard to zip past your defense. It has very good 
 speed, but poor health. Shots from the Quick tower do extra damage, shots from the 
-Basic tower do normal damage, and shots from the Fire tower do minimal damage. They are
-BLUE.
+Basic tower do normal damage, and shots from the Fire tower do minimal damage. They 
+are BLUE.
 
-The HEAVY enemy type is a heavily-armored beast that will slowly, but surely, make his
-way toward your base to devour you. It has a poor speed, but very good health. Shots
-from the Quick tower do minimal damage, shots from the Basic tower do normal damage, and
-shots from the Fire tower do extra damage. They are RED.
+The HEAVY enemy type is a heavily-armored beast that will slowly, but surely, make 
+his way toward your base to devour you. It has a poor speed, but very good health. 
+Shots from the Quick tower do minimal damage, shots from the Basic tower do normal 
+damage, and shots from the Fire tower do extra damage. They are RED.
 
 ****FIGHT!****
-Before a wave begins, you can use the money in your wallet to purchase different types
-of towers, and upgrade towers you have placed. Each tower costs $100. Upgrades start at
-$50, but the cost increases as each tower becomes stronger.
+Before a wave begins, you can use the money in your wallet to purchase different 
+types of towers, and upgrade towers you have placed. Each tower costs $100. Upgrades 
+start at $50, but the cost increases as each tower becomes stronger.
 
 Click a Tower Construction button to enter Construction mode. The Tower type you 
-selected will remain highlighted. Clicking on the board will place a Tower in the cell
-that has been selected. Towers can ONLY be placed on Grass tiles; they cannot be placed
-on the Path tiles that the Enemies travel on, or on Rocky tiles. Click the Tower
-Construction button again to exit Construction mode.
+selected will remain highlighted. Clicking on the board will place a Tower in the 
+cell that has been selected. Towers can ONLY be placed on Grass tiles; they cannot 
+be placed on the Path tiles that the Enemies travel on, or on Rocky tiles. Click the 
+Tower Construction button again to exit Construction mode.
 
-Clicking on a Tower that has been placed in the field will bring up the Tower menu. From
-this menu, you can upgrade the Tower's Firing Rate, Range, or Power. You can also sell
-the Tower, which will remove it from the screen and refund the player 3/4 of the Tower's
-worth (including upgrades). Be careful: once a tower has been sold, the tile that it was
-placed on becomes Rocky and cannot be used for any other Towers!
+Clicking on a Tower that has been placed in the field will bring up the Tower menu. 
+From this menu, you can upgrade the Tower's Firing Rate, Range, or Power. You can 
+also sell the Tower, which will remove it from the screen and refund the player 3/4 
+of the Tower's worth (including upgrades). Be careful: once a tower has been sold, 
+the tile that it was placed on becomes Rocky and cannot be used for any other Towers!
 
 To summon the next wave of enemies, click the Next Wave button. 10 enemies will spawn
-and rush toward your base. Everytime you kill an enemy, you gain money. If you discover
-that your defenses are failing, you can still place and upgrade towers as before while
-the enemies are attacking.
+and rush toward your base. Everytime you kill an enemy, you gain money. If you 
+discover that your defenses are failing, you can still place and upgrade towers as 
+before while the enemies are attacking.
 
 As Enemies take damage, they become darker in color. Similarly, every time you lose a
 life, your base becomes darker.
