@@ -58,8 +58,8 @@ private:
         QPixmap basicButtonMap;
         QPixmap pathMap;
         QPixmap holeMap;
-        QPixmap fireButtonMap;
         QPixmap quickButtonMap;
+        QPixmap fireButtonMap;
         QPixmap rangeButtonMap;
         QPixmap firingRateButtonMap;
         QPixmap powerButtonMap;

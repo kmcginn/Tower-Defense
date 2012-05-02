@@ -28,7 +28,7 @@
 #include <cstdio>
 #include <unistd.h>
 
-#define DEBUG
+//#define DEBUG //flag for debug statements
 using namespace std;
 
 
