@@ -12,7 +12,7 @@ acts as a display for the TowerDefense game
 #define MYPAINT_H_
  
 //!
-//! Yo: the Q_OBJECT macro tells us that this class can have
+//! The Q_OBJECT macro tells us that this class can have
 //! slots and signals.  It also tells qmake to compile this
 //! class in a special way
 //!
@@ -22,6 +22,7 @@ acts as a display for the TowerDefense game
 
 using namespace std;
 
+//class definition
 class MyPaint : public QWidget {
  	Q_OBJECT
 
