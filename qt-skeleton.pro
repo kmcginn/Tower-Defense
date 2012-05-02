@@ -15,7 +15,9 @@ HEADERS += MyPaint.h \
     Tower.h \
     Quick.h \
     Speedy.h \
-    Heavy.h
+    Heavy.h \
+    Fire.h \
+    Basic.h
 SOURCES += main.cpp MyPaint.cpp \
     Puny.cpp \
     Enemy.cpp \
@@ -23,7 +25,9 @@ SOURCES += main.cpp MyPaint.cpp \
     Tower.cpp \
     Quick.cpp \
     Speedy.cpp \
-    Heavy.cpp
+    Heavy.cpp \
+    Basic.cpp \
+    Fire.cpp
 
 OTHER_FILES +=
 
