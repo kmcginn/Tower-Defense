@@ -13,12 +13,15 @@ Qt 4.7.4 or later must be installed on your machine.
 
 INSTALLATION:
 ========================================================================================
-Compiling from source code:
+Compiling from source code in Linux:
 
-Run qmake-qt4 to generate makefile
-Run make to compile the code
+Place all files in a folder called 'Tower-Defense'.
 
-The game can now be played by running the executable named 'qt-skeleton'.
+Run: qmake-qt4 -project      || creates project files
+Run: qmake-qt4               || generates Makefile
+Run: make                    || generate executable
+
+The game can now be played by running the executable named 'Tower-Defense'.
 
 INSTRUCTIONS:
 =======================================================================================
