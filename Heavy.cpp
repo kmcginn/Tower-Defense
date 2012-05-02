@@ -16,24 +16,25 @@
 #include <cmath>
 using namespace std;
 
-Heavy::Heavy(int startX, int startY, int wave) : Enemy(startX, startY) {        // constructor; uses member initialization sytax to create an enemy of
-    initHealth(30*pow(1.5,wave-1)); //double health of puny                           // type "Heavy"
+Heavy::Heavy(int startX, int startY, int wave) : Enemy(startX, startY) { // constructor; uses member initialization sytax to create an enemy of
+    //initialize values
+    initHealth(30*pow(1.5,wave-1)); //double base health of puny                           // type "Heavy"
     initSpeed(40); //half speed of puny
     initType('h');
-    initValue(25*((wave+5)/5));
+    initValue(25*((wave+5)/5)); // increment value by 25 every 5 waves
 }
 
 
-void Heavy::takeDamage(int unchangedDamage, char type) {             // causes the ememy to take damage of specified type
+void Heavy::takeDamage(int unchangedDamage, char type) { // causes the ememy to take damage of specified type
 
-    if(type == 'b'){
+    if(type == 'b'){ // if tower is  basic
         loseHealth(unchangedDamage/2); //takes half of normal damage
     }
-    else if(type == 'q') {
+    else if(type == 'q') { // if tower is quick
         loseHealth(unchangedDamage/4); //takes a quarter of "quick" damage
 
     }
-    else if(type == 'f') {
+    else if(type == 'f') { // if tower is double
         loseHealth(unchangedDamage*2); //takes DOUBLE fire damage
     }
     else {

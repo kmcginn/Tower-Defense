@@ -14,8 +14,8 @@ This is the driver class for the Tower Defense display
 #include "MyPaint.h"
 
 int main(int argc, char *argv[]) {
-     QApplication app(argc, argv);
-     MyPaint p;
-     p.show();
+     QApplication app(argc, argv); // create a QApplication
+     MyPaint p; // create a MyPaint
+     p.show(); // run program
      return app.exec();
  }

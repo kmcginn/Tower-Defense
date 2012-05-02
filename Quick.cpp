@@ -6,13 +6,14 @@
 
 using namespace std;
 
-Quick::Quick(int posX, int posY) : Tower(posX,posY){
-    setFiringRate(6);
+Quick::Quick(int posX, int posY) : Tower(posX,posY){// basic quick tower constructor
+    // intialize values
+    setFiringRate(5);
     setRange(5);
-    setPower(2);
+    setPower(1);
     setType('q');
 }
 
-void Quick::fire(Enemy * target) {
+void Quick::fire(Enemy * target) { // fire function for quick tower
     target->takeDamage(this->getPower(), this->getType());
 }

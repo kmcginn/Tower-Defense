@@ -224,10 +224,10 @@ void Board::addTower(Tower * newTower) {
     }
 }
 
-int Board::findTower(int x, int y){
-    for (int i=0; i<towerList.size(); i++) {
-        Tower * temp=towerList[i];
-        if(temp->getPosX()==x && temp->getPosY()==y) {
+int Board::findTower(int x, int y){ // find tower based on grid location
+    for (int i=0; i<towerList.size(); i++) { // march through tower list
+        Tower * temp=towerList[i]; // create temp
+        if(temp->getPosX()==x && temp->getPosY()==y) { // check if location is correct
             return i;
         }
     }
@@ -239,53 +239,53 @@ void Board::sellTower(int index) { //refunds 3/4 the cost of tower at given inde
     towerList.erase(towerList.begin()+index); //remove tower from the list
 }
 
-int Board::isTowerClicked(){
+int Board::isTowerClicked(){ // checked if a tower is clicked
     if (towerClicked==-1) return 0;
     else return 1;
 }
 
-Tower * Board::getTowerClicked() {
+Tower * Board::getTowerClicked() { //returns a pointer to the clicked tower
     return towerList[towerClicked];
 }
 
-int Board::getTowerClickedIndex() {
+int Board::getTowerClickedIndex() { // returns the index of the tower clicked within the tower list
     return towerClicked;
 }
 
-void Board::setTowerClicked(int num) {
+void Board::setTowerClicked(int num) { // sets towerClicked to whatever tower's index is inputted
     towerClicked=num;
 }
 
-void Board::addEnemy(char type) {
-    if (type=='p')
-        enemyList.push_back(new Puny(1, 0, wave));
-    else if (type=='h')
-        enemyList.push_back(new Heavy(1, 0, wave));
-    else if (type=='s')
-        enemyList.push_back(new Speedy(1, 0, wave));
+void Board::addEnemy(char type) { // adds an enemy onto the board
+    if (type=='p') // if puny enemy is chosen
+        enemyList.push_back(new Puny(1, 0, wave)); // make a puny
+    else if (type=='h') // if a heavy enemy is chosen
+        enemyList.push_back(new Heavy(1, 0, wave)); // make a heavy
+    else if (type=='s') // if a speedy enemy is chosen
+        enemyList.push_back(new Speedy(1, 0, wave)); // make a speedy
 
 }
 
-int Board::getWave() {
+int Board::getWave() { // returns wave number
     return wave;
 }
 
-void Board::nextWave() {
+void Board::nextWave() { // increments wave by one
     wave+=1;
 }
 
-int Board::isWaveDone(int numEnemy) {
-    if (numEnemy<10&&waveDone==0)
+int Board::isWaveDone(int numEnemy) { // checks if wave is done based off of number of enemies currently spawned
+    if (numEnemy<10&&waveDone==0) // if number of enemies is less than 10
         return 0;
     else
         return 1;
 }
 
-int Board::isWaveDone() {
+int Board::isWaveDone() { // returns waveDone
     return waveDone;
 }
 
-void Board::setWaveDone() {
+void Board::setWaveDone() { // switches waveDone's value between 1 and 0
     int temp=waveDone;
     if (temp==1){
         waveDone=0;
@@ -295,41 +295,41 @@ void Board::setWaveDone() {
     }
 }
 
-int Board::getNumSpawned(){
+int Board::getNumSpawned(){ // returns number of enemies spawned
     return numSpawned;
 }
 
-void Board::nextSpawned() {
+void Board::nextSpawned() { // increments numSpawned by one
     numSpawned+=1;
 }
 
-void Board::resetNumSpawned() {
+void Board::resetNumSpawned() { // set numSpawned to 0
     numSpawned=0;
 }
 
-int Board::getMoney() {
+int Board::getMoney() { // returns the amount of money the player has
     return money;
 }
 
-void Board::addMoney(int amt) {
+void Board::addMoney(int amt) { // adds an inputted amount to money
     money+=amt;
 }
 
-void Board::loseMoney(int amt) {
+void Board::loseMoney(int amt) { // subtracts a certain amount from money
     money-=amt;
 }
 
-int Board::getLives() {
+int Board::getLives() { // returns number of lives
     return lives;
 }
 
-void Board::addLife(){
+void Board::addLife(){ // adds a life as long as there are no more than ten currently
     if(getLives() < 10){
         lives++;
     }
 }
 
-void Board::loseLife() {
+void Board::loseLife() { // subtracts one live as long as it's not already zero
     if(lives > 0)
         lives--;
 }
