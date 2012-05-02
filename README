@@ -87,4 +87,7 @@ before while the enemies are attacking.
 As Enemies take damage, they become darker in color. Similarly, every time you lose a
 life, your base becomes darker.
 
+Every 5 waves, you recieve a bonus of $100. Every 10 waves, you recieve a bonus
+life, up to a maximum total of 10 lives.
+
 Try to survive for as many waves as you can!
