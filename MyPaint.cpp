@@ -38,7 +38,14 @@ MyPaint::MyPaint(QWidget *parent)
       grassMap(":/grass_beta.png"),
       basicButtonMap(":/basic_button_beta.png"),
       pathMap(":/path.png"),
-      holeMap(":/hole.png"){
+      holeMap(":/hole.png"),
+      quickButtonMap(":/QuickButton.png"),
+      fireButtonMap(":/FireButton.png"),
+      rangeButtonMap(":/RangeButton.png"),
+      firingRateButtonMap(":/FiringRateButton.png"),
+      powerButtonMap(":/PowerButton.png"),
+      sellButtonMap(":/SellButton.png"),
+      waveButtonMap(":/WaveButton.png"){
         //initialize window
          setWindowTitle(tr("Tower Defense"));
          windowHorizontal = 512;
@@ -59,6 +66,8 @@ MyPaint::MyPaint(QWidget *parent)
          basicButtonBrush.setTexture(basicButtonMap);
          pathBrush.setTexture(pathMap);
          holeBrush.setTexture(holeMap);
+         fireButtonBrush.setTexture(fireButtonMap);
+         quickButtonBrush.setTexture(quickButtonMap);
 }
 
 // This method is called when the widget needs to be redrawn.
@@ -364,7 +373,8 @@ void MyPaint::paintEvent(QPaintEvent *) {
             //draws the button for making the enemies move
             painter.setBrush(Qt::blue);
             painter.setPen(Qt::black);
-            painter.drawRect(cellDim, cellDim*(numRows + 2), 5*cellDim, 3*cellDim);
+            //painter.drawRect(cellDim, cellDim*(numRows + 2), 5*cellDim, 3*cellDim);
+            painter.drawPixmap(cellDim, cellDim*(numRows + 2), 5*cellDim, 3*cellDim, waveButtonMap);
 
             //draws button for basic tower
             painter.setBrush(basicButtonBrush);
@@ -379,7 +389,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
 
 
             //draws button for quick tower
-            painter.setBrush(Qt::blue); //CHANGE TO IMAGE
+            painter.setBrush(quickButtonBrush); //CHANGE TO IMAGE
             //highlight button if selected
             if(myBoard.isQuickTowerButtonClicked()) {
                 painter.setPen(Qt::red);
@@ -390,7 +400,7 @@ void MyPaint::paintEvent(QPaintEvent *) {
             painter.drawRect(10*cellDim, cellDim*(numRows+2), 2*cellDim, 2*cellDim);
 
             //draws button for fire tower
-            painter.setBrush(Qt::red); //CHANGE TO IMAGE
+            painter.setBrush(fireButtonBrush); //CHANGE TO IMAGE
             //highlight button if selected
             if(myBoard.isFireTowerButtonClicked()){
                 painter.setPen(Qt::red);
@@ -408,13 +418,18 @@ void MyPaint::paintEvent(QPaintEvent *) {
                 painter.drawRect(20*cellDim, cellDim*(numRows+1),5*cellDim,4*cellDim);
 
                 //draw upgrade buttons
-                painter.setBrush(Qt::blue);
+                //range
+                painter.setBrush(rangeButtonMap);
                 painter.drawRect(21*cellDim, cellDim*(numRows+2),.9*cellDim,1*cellDim);
+                //firing rate
+                painter.setBrush(firingRateButtonMap);
                 painter.drawRect(22*cellDim, cellDim*(numRows+2),.9*cellDim,1*cellDim);
+                //power
+                painter.setBrush(powerButtonMap);
                 painter.drawRect(23*cellDim, cellDim*(numRows+2),.9*cellDim,1*cellDim);
 
                 //draw sell button
-                painter.setBrush(Qt::red);
+                painter.setBrush(sellButtonMap);
                 painter.drawRect(21*cellDim, cellDim*(numRows+3.5), 3*cellDim, cellDim);
             }
 

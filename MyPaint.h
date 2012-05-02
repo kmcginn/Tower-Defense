@@ -58,11 +58,26 @@ private:
         QPixmap basicButtonMap;
         QPixmap pathMap;
         QPixmap holeMap;
+        QPixmap fireButtonMap;
+        QPixmap quickButtonMap;
+        QPixmap rangeButtonMap;
+        QPixmap firingRateButtonMap;
+        QPixmap powerButtonMap;
+        QPixmap sellButtonMap;
+        QPixmap waveButtonMap;
         //brushes
         QBrush grassBrush;
         QBrush basicButtonBrush;
         QBrush pathBrush;
         QBrush holeBrush;
+        QBrush fireButtonBrush;
+        QBrush rangeButtonBrush;
+        QBrush firingRateButtonBrush;
+        QBrush powerButtonBrush;
+        QBrush sellButtonBrush;
+        QBrush waveButtonBrush;
+        QBrush quickButtonBrush;
+
 };
 
 #endif
