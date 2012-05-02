@@ -1,11 +1,14 @@
 /*
 Project Group: Chris Groce, Kevin McGinn, Nick Taylor
 CSE 20212
-3/25/2012
+Final Draft: 5/2/2012
 
 Enemy.cpp
 
-This is the implementation for the Enemy abstract base class
+This is the implementation file for enemy.h, which is the base enemy class
+
+This base class includes all of the information and functions needed
+for all the types of enemies: moving, getting properties, etc...
 
 */
 #include <iostream>

@@ -1,4 +1,13 @@
-//Add header later
+/* Chris Groce
+   Kevin McGinn
+   Nick Taylor
+    Final Draft: 5/2/2012
+    Quick.cpp
+
+    Implementation file for the quick tower, which inherits from tower
+
+    The quick tower shots slightly faster, but is less powerful*/
+
 
 #include"Quick.h"
 #include"Tower.h"

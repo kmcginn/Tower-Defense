@@ -1,15 +1,15 @@
-/*
-  Kevin McGinn
-  Chris Groce
-  Nick Taylor
+/* Chris Groce
+   Kevin McGinn
+   Nick Taylor
+    Final Draft: 5/2/2012
 
-  CSE 20212
-  4/24/2012
+    Heavy.cpp
 
-  Heavy.cpp
+    Implementation file for the Heavy enemy, which inherits from Enemy.h
 
-  This is the implementation for the Heavy class, which inherits from Enemy
-  */
+    The Heavy enemy moves slower than Puny, but has double the health and
+    take reduced damage from both quick and basic towers. It takes double
+    damage from fire towers though*/
 
 #include "Enemy.h"
 #include "Heavy.h"

@@ -1,6 +1,13 @@
-/*Chris Groce
-  Tower.cpp-source file for Tower.h
-  CSE20212 */
+/* Chris Groce
+   Kevin McGinn
+   Nick Taylor
+    Final Draft: 5/2/2012
+
+    Tower.cpp
+
+    Implementation file for the tower, which is the base class for all towers
+
+    Mostly get and set functions. The fire function is pure virtual*/
 
 #include <iostream>
 #include <vector>

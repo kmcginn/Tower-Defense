@@ -1,7 +1,18 @@
-/* Nick Taylor
-   Board.cpp - Board class file
-   Final Project
-   CSE20212 */
+/*
+Project Group: Chris Groce, Kevin McGinn, Nick Taylor
+CSE 20212
+Final Draft: 5/2/2012
+
+Board.cpp
+
+This is the implementation file for Board.h
+
+This class includes all of the information for playing the game. It
+has a vector of all of the enmeies on the board and all of the towers.
+There are many miscellaneous function to help different aspects of the
+game such as waves and buttons.
+
+*/
 
 #include <iostream>
 #include <vector>

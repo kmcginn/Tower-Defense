@@ -1,3 +1,13 @@
+/* Chris Groce
+   Kevin McGinn
+   Nick Taylor
+    Final Draft: 5/2/2012
+
+    Basic.cpp
+
+    Implementation file for the basic tower, which inherits from tower
+
+    Basic tower has decent stats*/
 
 #include "Basic.h"
 #include "Tower.h"

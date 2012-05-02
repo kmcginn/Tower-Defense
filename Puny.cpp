@@ -1,12 +1,14 @@
 /*
 Project Group: Chris Groce, Kevin McGinn, Nick Taylor
 CSE 20212
-3/20/2012
+Final draft: 5/2/2012
 
 Puny.cpp
 
 This is the implementation for the Puny class,
 which inherits from Enemy
+
+The Puny enemy is the basic enemy type
 
 */
 
